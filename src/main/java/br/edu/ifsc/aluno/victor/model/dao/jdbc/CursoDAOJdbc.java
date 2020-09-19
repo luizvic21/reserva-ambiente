@@ -6,6 +6,7 @@ import br.edu.ifsc.aluno.victor.model.Cidade;
 import br.edu.ifsc.aluno.victor.model.Curso;
 import br.edu.ifsc.aluno.victor.model.dao.ConnectionFactory;
 import br.edu.ifsc.aluno.victor.model.dao.CursoDAO;
+import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Service
 public class CursoDAOJdbc implements CursoDAO {
 
     @Override

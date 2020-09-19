@@ -5,12 +5,18 @@ import br.edu.ifsc.aluno.victor.model.Servidor;
 import br.edu.ifsc.aluno.victor.model.dao.ServidorDAO;
 import br.edu.ifsc.aluno.victor.service.EnderecoService;
 import br.edu.ifsc.aluno.victor.service.ServidorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ServidorServiceImpl implements ServidorService {
 
+    @Autowired
     private EnderecoService enderecoService;
+
+    @Autowired
     private ServidorDAO servidorDAO;
 
     @Override

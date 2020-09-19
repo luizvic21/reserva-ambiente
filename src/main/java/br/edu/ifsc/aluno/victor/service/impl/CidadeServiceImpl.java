@@ -3,14 +3,16 @@ package br.edu.ifsc.aluno.victor.service.impl;
 import br.edu.ifsc.aluno.victor.model.Cidade;
 import br.edu.ifsc.aluno.victor.model.dao.CidadeDAO;
 import br.edu.ifsc.aluno.victor.service.CidadeService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@AllArgsConstructor
+@Service
 public class CidadeServiceImpl implements CidadeService {
 
-    private final CidadeDAO cidadeDAO;
+    @Autowired
+    private CidadeDAO cidadeDAO;
 
     @Override
     public void cadastrar(Cidade cidade) {

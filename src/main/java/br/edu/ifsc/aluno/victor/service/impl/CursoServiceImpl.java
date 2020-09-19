@@ -3,11 +3,15 @@ package br.edu.ifsc.aluno.victor.service.impl;
 import br.edu.ifsc.aluno.victor.model.Curso;
 import br.edu.ifsc.aluno.victor.model.dao.CursoDAO;
 import br.edu.ifsc.aluno.victor.service.CursoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CursoServiceImpl implements CursoService {
 
+    @Autowired
     private CursoDAO cursoDAO;
 
     @Override

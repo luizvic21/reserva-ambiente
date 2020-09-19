@@ -5,6 +5,7 @@ import br.edu.ifsc.aluno.victor.model.Endereco;
 import br.edu.ifsc.aluno.victor.model.Usuario;
 import br.edu.ifsc.aluno.victor.model.dao.ConnectionFactory;
 import br.edu.ifsc.aluno.victor.model.dao.UsuarioDAO;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Service
 public class UsuarioDAOJdbc implements UsuarioDAO {
 
     @Override

@@ -5,14 +5,17 @@ import br.edu.ifsc.aluno.victor.model.Endereco;
 import br.edu.ifsc.aluno.victor.model.dao.EnderecoDAO;
 import br.edu.ifsc.aluno.victor.service.CidadeService;
 import br.edu.ifsc.aluno.victor.service.EnderecoService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
+@Service
 public class EnderecoServiceImpl implements EnderecoService {
 
-    private final EnderecoDAO enderecoDAO;
+    @Autowired
+    private EnderecoDAO enderecoDAO;
 
-    private final CidadeService cidadeService;
+    @Autowired
+    private CidadeService cidadeService;
 
     @Override
     public void cadastrar(Endereco endereco) {

@@ -5,12 +5,18 @@ import br.edu.ifsc.aluno.victor.model.Usuario;
 import br.edu.ifsc.aluno.victor.model.dao.UsuarioDAO;
 import br.edu.ifsc.aluno.victor.service.EnderecoService;
 import br.edu.ifsc.aluno.victor.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UsuarioServiceImpl implements UsuarioService {
 
+    @Autowired
     private EnderecoService enderecoService;
+
+    @Autowired
     private UsuarioDAO usuarioDAO;
 
     @Override

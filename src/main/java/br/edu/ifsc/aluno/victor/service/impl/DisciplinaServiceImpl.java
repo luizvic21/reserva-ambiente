@@ -3,11 +3,15 @@ package br.edu.ifsc.aluno.victor.service.impl;
 import br.edu.ifsc.aluno.victor.model.Disciplina;
 import br.edu.ifsc.aluno.victor.model.dao.DisciplinaDAO;
 import br.edu.ifsc.aluno.victor.service.DisciplinaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DisciplinaServiceImpl implements DisciplinaService {
 
+    @Autowired
     private DisciplinaDAO disciplinaDAO;
 
     @Override

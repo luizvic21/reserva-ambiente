@@ -3,6 +3,7 @@ package br.edu.ifsc.aluno.victor.model.dao.jdbc;
 import br.edu.ifsc.aluno.victor.model.Disciplina;
 import br.edu.ifsc.aluno.victor.model.dao.ConnectionFactory;
 import br.edu.ifsc.aluno.victor.model.dao.DisciplinaDAO;
+import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Service
 public class DisciplinaDAOJdbc implements DisciplinaDAO {
 
     @Override

@@ -6,6 +6,7 @@ import br.edu.ifsc.aluno.victor.enuns.EnumTipoServidor;
 import br.edu.ifsc.aluno.victor.model.*;
 import br.edu.ifsc.aluno.victor.model.dao.ConnectionFactory;
 import br.edu.ifsc.aluno.victor.model.dao.CursoDisciplinaDAO;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Service
 public class CursoDisciplinaDAOJdbc implements CursoDisciplinaDAO {
 
     @Override

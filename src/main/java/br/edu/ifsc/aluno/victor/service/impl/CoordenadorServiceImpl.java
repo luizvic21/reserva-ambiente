@@ -7,13 +7,21 @@ import br.edu.ifsc.aluno.victor.model.dao.CoordenadorDAO;
 import br.edu.ifsc.aluno.victor.service.CoordenadorService;
 import br.edu.ifsc.aluno.victor.service.CursoService;
 import br.edu.ifsc.aluno.victor.service.ServidorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CoordenadorServiceImpl implements CoordenadorService {
 
+    @Autowired
     private ServidorService servidorService;
+
+    @Autowired
     private CursoService cursoService;
+
+    @Autowired
     private CoordenadorDAO coordenadorDAO;
 
     @Override

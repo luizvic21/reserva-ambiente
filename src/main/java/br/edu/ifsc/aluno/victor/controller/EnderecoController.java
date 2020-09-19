@@ -2,12 +2,14 @@ package br.edu.ifsc.aluno.victor.controller;
 
 import br.edu.ifsc.aluno.victor.model.Endereco;
 import br.edu.ifsc.aluno.victor.service.EnderecoService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
+@Service
 public class EnderecoController {
 
-    private final EnderecoService enderecoService;
+    @Autowired
+    private EnderecoService enderecoService;
 
     public void cadastrar(Endereco endereco) {
         enderecoService.cadastrar(endereco);

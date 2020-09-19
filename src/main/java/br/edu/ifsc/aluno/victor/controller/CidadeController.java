@@ -1,23 +1,15 @@
 package br.edu.ifsc.aluno.victor.controller;
 
 import br.edu.ifsc.aluno.victor.model.Cidade;
-import br.edu.ifsc.aluno.victor.model.dao.CidadeDAO;
-import br.edu.ifsc.aluno.victor.model.dao.jdbc.CidadeDAOJdbc;
 import br.edu.ifsc.aluno.victor.service.CidadeService;
-import br.edu.ifsc.aluno.victor.service.impl.CidadeServiceImpl;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@AllArgsConstructor
 public class CidadeController {
 
-    private final CidadeService cidadeService;
-
-    public CidadeController() {
-        CidadeDAO cidadeDAO = new CidadeDAOJdbc();
-        cidadeService = new CidadeServiceImpl(cidadeDAO);
-    }
+    @Autowired
+    private CidadeService cidadeService;
 
     public void cadastrar(Cidade cidade) {
         cidadeService.cadastrar(cidade);

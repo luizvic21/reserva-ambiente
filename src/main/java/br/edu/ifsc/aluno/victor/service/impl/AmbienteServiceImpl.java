@@ -5,12 +5,18 @@ import br.edu.ifsc.aluno.victor.model.Bloco;
 import br.edu.ifsc.aluno.victor.model.dao.AmbienteDAO;
 import br.edu.ifsc.aluno.victor.service.AmbienteService;
 import br.edu.ifsc.aluno.victor.service.BlocoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AmbienteServiceImpl implements AmbienteService {
 
+    @Autowired
     private BlocoService blocoService;
+
+    @Autowired
     private AmbienteDAO ambienteDAO;
 
     @Override

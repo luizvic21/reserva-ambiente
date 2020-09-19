@@ -9,14 +9,24 @@ import br.edu.ifsc.aluno.victor.service.CursoDisciplinaService;
 import br.edu.ifsc.aluno.victor.service.CursoService;
 import br.edu.ifsc.aluno.victor.service.DisciplinaService;
 import br.edu.ifsc.aluno.victor.service.ServidorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CursoDisciplinaServiceImpl implements CursoDisciplinaService {
 
+    @Autowired
     private CursoService cursoService;
+
+    @Autowired
     private DisciplinaService disciplinaService;
+
+    @Autowired
     private ServidorService servidorService;
+
+    @Autowired
     private CursoDisciplinaDAO cursoDisciplinaDAO;
 
     @Override
