@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum EnumTipoServidor {
 
     DOCENTE("Docente"),
-    TAE("Tae");
+    TAE("TAE");
 
     private String descricao;
 

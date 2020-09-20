@@ -64,6 +64,7 @@ public class ServidorDAOJdbc implements ServidorDAO {
                 "       s.siape,\n" +
                 "       s.tipo_servidor,\n" +
                 "       s.foto,\n" +
+                "       s.endereco_id,\n" +
                 "       e.cep,\n" +
                 "       e.descricao as endereco_descricao,\n" +
                 "       e.numero,\n" +
@@ -71,11 +72,11 @@ public class ServidorDAOJdbc implements ServidorDAO {
                 "       cidade_id,\n" +
                 "       c.descricao as cidade_descricao " +
                 "FROM\n" +
-                "     servido s" +
-                "     JOIN endereco e on s.endereco = e.id\n" +
+                "     servidor s" +
+                "     JOIN endereco e on s.endereco_id = e.id\n" +
                 "     JOIN cidade c on e.cidade_id = c.id\n" +
                 "WHERE\n" +
-                "   e.id = ?";
+                "   s.id = ?";
 
         try {
             Servidor servidor = null;
@@ -144,6 +145,7 @@ public class ServidorDAOJdbc implements ServidorDAO {
                 "       s.siape,\n" +
                 "       s.tipo_servidor,\n" +
                 "       s.foto,\n" +
+                "       s.endereco_id,\n" +
                 "       e.cep,\n" +
                 "       e.descricao as endereco_descricao,\n" +
                 "       e.numero,\n" +
@@ -151,8 +153,8 @@ public class ServidorDAOJdbc implements ServidorDAO {
                 "       cidade_id,\n" +
                 "       c.descricao as cidade_descricao " +
                 "FROM\n" +
-                "     servido s" +
-                "     JOIN endereco e on s.endereco = e.id\n" +
+                "     servidor s" +
+                "     JOIN endereco e on s.endereco_id = e.id\n" +
                 "     JOIN cidade c on e.cidade_id = c.id\n";
 
         try {

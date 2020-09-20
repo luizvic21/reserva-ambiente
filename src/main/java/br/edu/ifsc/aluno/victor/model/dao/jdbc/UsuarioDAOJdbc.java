@@ -51,7 +51,7 @@ public class UsuarioDAOJdbc implements UsuarioDAO {
         ResultSet rs;
 
         String query = "SELECT\n" +
-                "  u.id as servidor_id,\n" +
+                "  u.id as id,\n" +
                 "       u.nome,\n" +
                 "       u.data_nascimento,\n" +
                 "       u.fone,\n" +
@@ -61,6 +61,7 @@ public class UsuarioDAOJdbc implements UsuarioDAO {
                 "       u.rg,\n" +
                 "       u.username,\n" +
                 "       u.senha,\n" +
+                "       u.endereco_id,\n" +
                 "       e.cep,\n" +
                 "       e.descricao as endereco_descricao,\n" +
                 "       e.numero,\n" +
@@ -69,10 +70,10 @@ public class UsuarioDAOJdbc implements UsuarioDAO {
                 "       c.descricao as cidade_descricao " +
                 "FROM\n" +
                 "     usuario u" +
-                "     JOIN endereco e on u.endereco = e.id\n" +
+                "     JOIN endereco e on u.endereco_id = e.id\n" +
                 "     JOIN cidade c on e.cidade_id = c.id\n" +
                 "WHERE\n" +
-                "   e.id = ?";
+                "   u.id = ?";
 
         try {
             Usuario usuario = null;
@@ -93,7 +94,7 @@ public class UsuarioDAOJdbc implements UsuarioDAO {
                         rs.getString("bairro"),
                         cidade);
                 usuario = new Usuario(
-                        rs.getInt("servidor_id"),
+                        rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getDate("data_nascimento").toLocalDate(),
                         rs.getString("fone"),
@@ -129,7 +130,7 @@ public class UsuarioDAOJdbc implements UsuarioDAO {
         ResultSet rs;
 
         String query = "SELECT\n" +
-                "  u.id as servidor_id,\n" +
+                "  u.id as id,\n" +
                 "       u.nome,\n" +
                 "       u.data_nascimento,\n" +
                 "       u.fone,\n" +
@@ -139,6 +140,7 @@ public class UsuarioDAOJdbc implements UsuarioDAO {
                 "       u.rg,\n" +
                 "       u.username,\n" +
                 "       u.senha,\n" +
+                "       u.endereco_id,\n" +
                 "       e.cep,\n" +
                 "       e.descricao as endereco_descricao,\n" +
                 "       e.numero,\n" +
@@ -147,7 +149,7 @@ public class UsuarioDAOJdbc implements UsuarioDAO {
                 "       c.descricao as cidade_descricao " +
                 "FROM\n" +
                 "     usuario u" +
-                "     JOIN endereco e on u.endereco = e.id\n" +
+                "     JOIN endereco e on u.endereco_id = e.id\n" +
                 "     JOIN cidade c on e.cidade_id = c.id\n";
 
         try {
@@ -168,7 +170,7 @@ public class UsuarioDAOJdbc implements UsuarioDAO {
                         rs.getString("bairro"),
                         cidade);
                 Usuario usuario = new Usuario(
-                        rs.getInt("servidor_id"),
+                        rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getDate("data_nascimento").toLocalDate(),
                         rs.getString("fone"),
@@ -240,5 +242,87 @@ public class UsuarioDAOJdbc implements UsuarioDAO {
         }
 
         ConnectionFactory.closeConnection(connection, pstm);
+    }
+
+
+    @Override
+    public Optional<Usuario> logar(String username, String senha) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement pstm;
+        ResultSet rs;
+
+        String query = "SELECT\n" +
+                "  u.id as id,\n" +
+                "       u.nome,\n" +
+                "       u.data_nascimento,\n" +
+                "       u.fone,\n" +
+                "       u.fone2,\n" +
+                "       u.email,\n" +
+                "       u.cpf,\n" +
+                "       u.rg,\n" +
+                "       u.username,\n" +
+                "       u.senha,\n" +
+                "       u.endereco_id,\n" +
+                "       e.cep,\n" +
+                "       e.descricao as endereco_descricao,\n" +
+                "       e.numero,\n" +
+                "       e.bairro,\n" +
+                "       cidade_id,\n" +
+                "       c.descricao as cidade_descricao " +
+                "FROM\n" +
+                "     usuario u" +
+                "     JOIN endereco e on u.endereco_id = e.id\n" +
+                "     JOIN cidade c on e.cidade_id = c.id\n" +
+                "WHERE\n" +
+                "   u.username = ? \n" +
+                "   AND u.senha = ?";
+
+        try {
+            Usuario usuario = null;
+            pstm = connection.prepareStatement(query);
+            pstm.setString(1, username);
+            pstm.setString(2, senha);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                Cidade cidade = new Cidade(
+                        rs.getInt("cidade_id"),
+                        rs.getString("cidade_descricao")
+                );
+                Endereco endereco = new Endereco(
+                        rs.getInt("endereco_id"),
+                        rs.getString("cep"),
+                        rs.getString("endereco_descricao"),
+                        rs.getInt("numero"),
+                        rs.getString("bairro"),
+                        cidade);
+                usuario = new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDate("data_nascimento").toLocalDate(),
+                        rs.getString("fone"),
+                        rs.getString("fone2"),
+                        rs.getString("email"),
+                        rs.getString("cpf"),
+                        rs.getString("rg"),
+                        endereco,
+                        rs.getString( "username"),
+                        rs.getString("senha")
+                );
+            }
+
+            ConnectionFactory.closeConnection(connection, pstm, rs);
+
+            if (Objects.nonNull(usuario)) {
+                return Optional.of(usuario);
+            }
+
+            return Optional.empty();
+        } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection);
+            ex.printStackTrace();
+        }
+
+        return Optional.empty();
     }
 }

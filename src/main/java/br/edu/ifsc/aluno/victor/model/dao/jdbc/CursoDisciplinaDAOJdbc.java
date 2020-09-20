@@ -70,8 +70,7 @@ public class CursoDisciplinaDAOJdbc implements CursoDisciplinaDAO {
                 "       s.siape,\n" +
                 "       s.tipo_servidor,\n" +
                 "       s.foto,\n" +
-                "       s.pessoa_id,\n" +
-                "       s.endereco,\n" +
+                "       s.endereco_id,\n" +
                 "       e.cep,\n" +
                 "       e.descricao AS endereco_descricao,\n" +
                 "       e.numero,\n" +
@@ -83,7 +82,7 @@ public class CursoDisciplinaDAOJdbc implements CursoDisciplinaDAO {
                 "    JOIN curso cur ON cd.curso_id = cur.id\n" +
                 "    JOIN disciplina d ON cd.disciplina_id = d.id\n" +
                 "    JOIN servidor s ON cd.docente_id = s.id\n" +
-                "    JOIN endereco e ON s.endereco = e.id\n" +
+                "    JOIN endereco e ON s.endereco_id = e.id\n" +
                 "    JOIN cidade cid ON e.cidade_id = cid.id\n" +
                 "WHERE\n" +
                 "  cd.id = ?";
@@ -114,7 +113,7 @@ public class CursoDisciplinaDAOJdbc implements CursoDisciplinaDAO {
                         EnumPeriodo.valueOf(rs.getString("periodo"))
                 );
                 Servidor docente = new Servidor(
-                        rs.getInt("servidor_id"),
+                        rs.getInt("docente_id"),
                         rs.getString("nome"),
                         rs.getDate("data_nascimento").toLocalDate(),
                         rs.getString("fone"),
@@ -184,8 +183,7 @@ public class CursoDisciplinaDAOJdbc implements CursoDisciplinaDAO {
                     "       s.siape,\n" +
                     "       s.tipo_servidor,\n" +
                     "       s.foto,\n" +
-                    "       s.pessoa_id,\n" +
-                    "       s.endereco,\n" +
+                    "       s.endereco_id,\n" +
                     "       e.cep,\n" +
                     "       e.descricao AS endereco_descricao,\n" +
                     "       e.numero,\n" +
@@ -197,7 +195,7 @@ public class CursoDisciplinaDAOJdbc implements CursoDisciplinaDAO {
                     "    JOIN curso cur ON cd.curso_id = cur.id\n" +
                     "    JOIN disciplina d ON cd.disciplina_id = d.id\n" +
                     "    JOIN servidor s ON cd.docente_id = s.id\n" +
-                    "    JOIN endereco e ON s.endereco = e.id\n" +
+                    "    JOIN endereco e ON s.endereco_id = e.id\n" +
                     "    JOIN cidade cid ON e.cidade_id = cid.id";
 
             try {
@@ -225,7 +223,7 @@ public class CursoDisciplinaDAOJdbc implements CursoDisciplinaDAO {
                             EnumPeriodo.valueOf(rs.getString("periodo"))
                     );
                     Servidor docente = new Servidor(
-                            rs.getInt("servidor_id"),
+                            rs.getInt("docente_id"),
                             rs.getString("nome"),
                             rs.getDate("data_nascimento").toLocalDate(),
                             rs.getString("fone"),

@@ -39,7 +39,7 @@ public class ServidorServiceImpl implements ServidorService {
     public void alterar(Integer id, Servidor servidor) {
         Endereco endereco = enderecoService.consultar(servidor.getEndereco().getId());
         Servidor servidorAtual = consultar(id);
-        servidorDAO.create(servidorAtual.editar(endereco, servidor));
+        servidorDAO.update(servidorAtual.editar(endereco, servidor));
     }
 
     @Override

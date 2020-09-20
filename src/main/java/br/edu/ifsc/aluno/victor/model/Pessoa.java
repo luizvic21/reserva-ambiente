@@ -23,7 +23,7 @@ public abstract class Pessoa  {
 
     protected void preencher(Endereco endereco, Pessoa pessoa) {
         this.nome = pessoa.getNome();
-        this.dataNascimento = getDataNascimento();
+        this.dataNascimento = pessoa.getDataNascimento();
         this.fone = pessoa.getFone();
         this.fone2 = pessoa.getFone2();
         this.email = pessoa.getEmail();

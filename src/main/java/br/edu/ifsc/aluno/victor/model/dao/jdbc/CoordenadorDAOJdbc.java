@@ -22,15 +22,14 @@ public class CoordenadorDAOJdbc implements CoordenadorDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
 
-        String query = "INSERT INTO coordenador (data_inicio, data_fim, ativo, servidor_id, curso_id) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO coordenador (data_inicio, ativo, servidor_id, curso_id) VALUES (?, ?, ?, ?)";
 
         try {
             pstm = connection.prepareStatement(query);
             pstm.setDate(1, Date.valueOf(object.getDataInicio()));
-            pstm.setDate(2, Date.valueOf(object.getDataFim()));
-            pstm.setBoolean(3, object.getAtivo());
-            pstm.setInt(4, object.getServidor().getId());
-            pstm.setInt(5, object.getCurso().getId());
+            pstm.setBoolean(2, object.getAtivo());
+            pstm.setInt(3, object.getServidor().getId());
+            pstm.setInt(4, object.getCurso().getId());
             pstm.executeUpdate();
         } catch (SQLException ex) {
             ConnectionFactory.closeConnection(connection);
@@ -67,6 +66,7 @@ public class CoordenadorDAOJdbc implements CoordenadorDAO {
                 "       s.siape,\n" +
                 "       s.tipo_servidor,\n" +
                 "       s.foto,\n" +
+                "       s.endereco_id,\n" +
                 "       e.cep,\n" +
                 "       e.descricao as endereco_descricao,\n" +
                 "       e.numero,\n" +
@@ -77,8 +77,8 @@ public class CoordenadorDAOJdbc implements CoordenadorDAO {
                 "    coordenador coor\n" +
                 "    JOIN curso cur ON coor.curso_id = cur.id" +
                 "    JOIN servidor s ON coor.servidor_id = s.id\n" +
-                "    JOIN endereco e ON s.endereco = e.id\n" +
-                "    JOIN cidade cid ON e.cidade_id = coor.id\n" +
+                "    JOIN endereco e ON s.endereco_id = e.id\n" +
+                "    JOIN cidade cid ON e.cidade_id = cid.id\n" +
                 "WHERE \n" +
                 "    coor.id = ?";
 
@@ -125,7 +125,7 @@ public class CoordenadorDAOJdbc implements CoordenadorDAO {
                 coordenador = new Coordenador(
                         rs.getInt("id"),
                         rs.getDate("data_inicio").toLocalDate(),
-                        rs.getDate("data_fim").toLocalDate(),
+                        Objects.nonNull(rs.getDate("data_fim")) ? rs.getDate("data_fim").toLocalDate() : null,
                         rs.getBoolean("ativo"),
                         servidor,
                         curso
@@ -174,6 +174,7 @@ public class CoordenadorDAOJdbc implements CoordenadorDAO {
                 "       s.siape,\n" +
                 "       s.tipo_servidor,\n" +
                 "       s.foto,\n" +
+                "       s.endereco_id,\n" +
                 "       e.cep,\n" +
                 "       e.descricao as endereco_descricao,\n" +
                 "       e.numero,\n" +
@@ -184,8 +185,8 @@ public class CoordenadorDAOJdbc implements CoordenadorDAO {
                 "    coordenador coor\n" +
                 "    JOIN curso cur ON coor.curso_id = cur.id" +
                 "    JOIN servidor s ON coor.servidor_id = s.id\n" +
-                "    JOIN endereco e ON s.endereco = e.id\n" +
-                "    JOIN cidade cid ON e.cidade_id = coor.id\n";
+                "    JOIN endereco e ON s.endereco_id = e.id\n" +
+                "    JOIN cidade cid ON e.cidade_id = cid.id\n";
 
         try {
             List<Coordenador> coordenadores = new ArrayList<>();
@@ -228,7 +229,7 @@ public class CoordenadorDAOJdbc implements CoordenadorDAO {
                 Coordenador coordenador = new Coordenador(
                         rs.getInt("id"),
                         rs.getDate("data_inicio").toLocalDate(),
-                        rs.getDate("data_fim").toLocalDate(),
+                        Objects.nonNull(rs.getDate("data_fim")) ? rs.getDate("data_fim").toLocalDate() : null,
                         rs.getBoolean("ativo"),
                         servidor,
                         curso
@@ -258,7 +259,7 @@ public class CoordenadorDAOJdbc implements CoordenadorDAO {
         try {
             pstm = connection.prepareStatement(query);
             pstm.setDate(1, Date.valueOf(object.getDataInicio()));
-            pstm.setDate(2, Date.valueOf(object.getDataFim()));
+            pstm.setDate(2, Objects.nonNull(object.getDataFim()) ? Date.valueOf(object.getDataFim()) : null);
             pstm.setBoolean(3, object.getAtivo());
             pstm.setInt(4, object.getServidor().getId());
             pstm.setInt(5, object.getCurso().getId());
@@ -289,5 +290,114 @@ public class CoordenadorDAOJdbc implements CoordenadorDAO {
         }
 
         ConnectionFactory.closeConnection(connection, pstm);
+    }
+
+    @Override
+    public Optional<Coordenador> buscarCoordenadorAtivo(Integer cursoId) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement pstm;
+        ResultSet rs;
+
+        String query = "SELECT \n" +
+                "       coor.id,\n" +
+                "       coor.data_inicio,\n" +
+                "       coor.data_fim,\n" +
+                "       coor.ativo,\n" +
+                "       coor.servidor_id,\n" +
+                "       coor.curso_id,\n" +
+                "       cur.descricao as curso_descricao,\n" +
+                "       cur.email as curso_email,\n" +
+                "       modalidade,\n" +
+                "       periodo," +
+                "       s.nome,\n" +
+                "       s.data_nascimento,\n" +
+                "       s.fone,\n" +
+                "       s.fone2,\n" +
+                "       s.email,\n" +
+                "       s.cpf,\n" +
+                "       s.rg,\n" +
+                "       s.siape,\n" +
+                "       s.tipo_servidor,\n" +
+                "       s.foto,\n" +
+                "       s.endereco_id,\n" +
+                "       e.cep,\n" +
+                "       e.descricao as endereco_descricao,\n" +
+                "       e.numero,\n" +
+                "       e.bairro,\n" +
+                "       e.cidade_id,\n" +
+                "       cid.descricao as cidade_descricao\n" +
+                "FROM\n" +
+                "    coordenador coor\n" +
+                "    JOIN curso cur ON coor.curso_id = cur.id" +
+                "    JOIN servidor s ON coor.servidor_id = s.id\n" +
+                "    JOIN endereco e ON s.endereco_id = e.id\n" +
+                "    JOIN cidade cid ON e.cidade_id = cid.id\n" +
+                "WHERE \n" +
+                "    cur.id = ? \n" +
+                "    AND coor.ativo = TRUE";
+
+        try {
+            Coordenador coordenador = null;
+            pstm = connection.prepareStatement(query);
+            pstm.setInt(1, cursoId);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                Cidade cidade = new Cidade(
+                        rs.getInt("cidade_id"),
+                        rs.getString("cidade_descricao")
+                );
+                Endereco endereco = new Endereco(
+                        rs.getInt("endereco_id"),
+                        rs.getString("cep"),
+                        rs.getString("endereco_descricao"),
+                        rs.getInt("numero"),
+                        rs.getString("bairro"),
+                        cidade);
+                Curso curso = new Curso(
+                        rs.getInt("curso_id"),
+                        rs.getString("curso_descricao"),
+                        rs.getString("curso_email"),
+                        EnumModalidade.valueOf(rs.getString("modalidade")),
+                        EnumPeriodo.valueOf(rs.getString("periodo"))
+                );
+                Servidor servidor = new Servidor(
+                        rs.getInt("servidor_id"),
+                        rs.getString("nome"),
+                        rs.getDate("data_nascimento").toLocalDate(),
+                        rs.getString("fone"),
+                        rs.getString("fone2"),
+                        rs.getString("email"),
+                        rs.getString("cpf"),
+                        rs.getString("rg"),
+                        endereco,
+                        rs.getString("siape"),
+                        EnumTipoServidor.valueOf(rs.getString("tipo_servidor")),
+                        rs.getString("foto")
+                );
+
+                coordenador = new Coordenador(
+                        rs.getInt("id"),
+                        rs.getDate("data_inicio").toLocalDate(),
+                        Objects.nonNull(rs.getDate("data_fim")) ? rs.getDate("data_fim").toLocalDate() : null,
+                        rs.getBoolean("ativo"),
+                        servidor,
+                        curso
+                );
+            }
+
+            ConnectionFactory.closeConnection(connection, pstm, rs);
+
+            if (Objects.nonNull(coordenador)) {
+                return Optional.of(coordenador);
+            }
+
+            return Optional.empty();
+        } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection);
+            ex.printStackTrace();
+        }
+
+        return Optional.empty();
     }
 }

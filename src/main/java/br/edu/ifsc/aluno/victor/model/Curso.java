@@ -5,6 +5,9 @@ import br.edu.ifsc.aluno.victor.enuns.EnumPeriodo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@ToString
 
 @NoArgsConstructor
 @AllArgsConstructor

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -39,12 +40,21 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void alterar(Integer id, Usuario usuario) {
         Endereco endereco = enderecoService.consultar(usuario.getEndereco().getId());
         Usuario usuarioAtual = consultar(id);
-        usuarioDAO.create(usuarioAtual.editar(endereco, usuario));
+        usuarioDAO.update(usuarioAtual.editar(endereco, usuario));
     }
 
     @Override
     public void deletar(Integer id) {
         consultar(id);
         usuarioDAO.delete(id);
+    }
+
+    @Override
+    public Boolean logar(String username, String senha) {
+        Optional<Usuario> usuario = usuarioDAO.logar(username, senha);
+        if (usuario.isPresent()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -3,8 +3,11 @@ package br.edu.ifsc.aluno.victor.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
+
+@ToString
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,6 +35,12 @@ public class Coordenador {
 
     public Coordenador editar(Servidor servidor, Curso curso, Coordenador coordenador) {
         this.preencher(servidor, curso, coordenador);
+        return this;
+    }
+
+    public Coordenador desativar(){
+        this.dataFim = LocalDate.now();
+        this.ativo = false;
         return this;
     }
 }

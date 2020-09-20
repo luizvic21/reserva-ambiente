@@ -11,4 +11,5 @@ public interface UsuarioService {
     List<Usuario> consultar();
     void alterar(Integer id, Usuario usuario);
     void deletar(Integer id);
+    Boolean logar(String username, String senha);
 }

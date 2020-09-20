@@ -39,7 +39,7 @@ public class AmbienteServiceImpl implements AmbienteService {
     public void alterar(Integer id, Ambiente ambiente) {
         Bloco bloco = blocoService.consultar(ambiente.getBloco().getId());
         Ambiente ambienteAtual = consultar(id);
-        ambienteDAO.create(ambienteAtual.editar(bloco, ambiente));
+        ambienteDAO.update(ambienteAtual.editar(bloco, ambiente));
     }
 
     @Override

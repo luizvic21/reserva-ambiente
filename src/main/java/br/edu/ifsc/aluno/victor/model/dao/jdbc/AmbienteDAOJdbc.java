@@ -71,7 +71,7 @@ public class AmbienteDAOJdbc implements AmbienteDAO {
             while (rs.next()) {
                 Bloco bloco = new Bloco(rs.getInt("bloco_id"), rs.getString("bloco_descricao"), rs.getString("bloco_foto"));
                 ambiente = new Ambiente(
-                        rs.getInt("id"),
+                        rs.getInt("ambiente_id"),
                         rs.getString("ambiente_descricao"),
                         rs.getString("sigla"),
                         rs.getString("ambiente_foto"),
@@ -121,7 +121,7 @@ public class AmbienteDAOJdbc implements AmbienteDAO {
             while (rs.next()) {
                 Bloco bloco = new Bloco(rs.getInt("bloco_id"), rs.getString("bloco_descricao"), rs.getString("bloco_foto"));
                 Ambiente ambiente = new Ambiente(
-                        rs.getInt("id"),
+                        rs.getInt("ambiente_id"),
                         rs.getString("ambiente_descricao"),
                         rs.getString("sigla"),
                         rs.getString("ambiente_foto"),

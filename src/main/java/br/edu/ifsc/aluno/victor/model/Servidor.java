@@ -1,12 +1,14 @@
 package br.edu.ifsc.aluno.victor.model;
 
 import br.edu.ifsc.aluno.victor.enuns.EnumTipoServidor;
-import com.sun.org.apache.regexp.internal.RE;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
+
+@ToString
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class Servidor extends Pessoa {
     private EnumTipoServidor tipoServidor;
     private String foto;
 
-    public Servidor(int id, String nome, LocalDate dataNascimento, String fone, String fone2, String email, String cpf, String rg, Endereco endereco, String siape, EnumTipoServidor tipoServidor, String foto) {
+    public Servidor(Integer id, String nome, LocalDate dataNascimento, String fone, String fone2, String email, String cpf, String rg, Endereco endereco, String siape, EnumTipoServidor tipoServidor, String foto) {
         super(id, nome, dataNascimento, fone, fone2, email, cpf, rg, endereco);
         this.siape = siape;
         this.tipoServidor = tipoServidor;

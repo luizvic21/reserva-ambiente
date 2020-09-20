@@ -53,7 +53,7 @@ public class CursoDisciplinaServiceImpl implements CursoDisciplinaService {
         Disciplina disciplina = disciplinaService.consultar(cursoDisciplina.getDisciplina().getId());
         Servidor docente = servidorService.consultar(cursoDisciplina.getDocente().getId());
         CursoDisciplina cursoDisciplinaAtual = consultar(id);
-        cursoDisciplinaDAO.create(cursoDisciplinaAtual.editar(docente, curso, disciplina, cursoDisciplina));
+        cursoDisciplinaDAO.update(cursoDisciplinaAtual.editar(docente, curso, disciplina, cursoDisciplina));
     }
 
     @Override
