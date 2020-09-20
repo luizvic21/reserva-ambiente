@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.util.List;
 
 @Service
-public class UsuarioController {
+public class UsuarioController  {
 
     @Autowired
     private UsuarioService usuarioService;
