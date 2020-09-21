@@ -1,0 +1,209 @@
+JFDML JFormDesigner: "7.0.2.6.321" Java: "11.0.7" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"title": "IFSC - Servidores"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+					name: "contentPanel"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+						name: "panel1"
+						"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "tituloLbl"
+							"text": "Titulo"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "North"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {seq {comp label4:::p::p, space :0:0:x}, seq t {space :::p, par t {comp dadosEnderecoPanel:::::x, comp nomeTxt::t::0:x, comp emailTxt::l::0:x, seq l {par t {comp label2::l:p::p, comp label3::l:p::p, seq l {comp label1:::p::p, space :::p, comp diaTxt:::p:22:p, space s:::p, comp label5:::p::p, space :::p, comp mesTxt:::p:22:p, space :p:18:p, comp label6:::p::p, space :::p, comp anoTxt:::p:40:p}, seq l {par l {comp foneTxt::l:p:225:p, comp label7::l:p::p}, space s:::p, par l {comp label8:::p::p, comp fone2Txt::l:p:225:p}}, seq l {par l {comp label10::l:p::p, comp label11::l:p::p, comp tipoServidorCbx::l:p::p, comp cpfTxt::l:p:225:p}, space :p:18:p, par l {comp label9::l:p::p, comp rgTxt:::p:225:p, comp label13:::p::p, comp siapeTxt::l:p:225:p}}}, space :0:15:x}}, space :::p}}"
+						"$verticalGroup": "par l {seq l {space :::p, comp label2:::p::p, space :p:14:p, comp nomeTxt:::p::p, space s:::p, comp label3:::p::p, space :p:12:p, comp emailTxt:::p::p, space s:::p, comp label4:::p::p, space s:::p, par b {comp label1::b:p::p, comp diaTxt::b:p::p, comp label5::b:p::p, comp mesTxt::b:p::p, comp anoTxt::l:p::p, comp label6::b:p::p}, space s:::p, par b {comp label7::b:p::p, comp label8::b:p::p}, space :p:8:p, par b {comp foneTxt::b:p::p, comp fone2Txt::b:p::p}, space :::p, par b {comp label10::b:p::p, comp label9::b:p::p}, space :p:9:p, par b {comp cpfTxt::b:p::p, comp rgTxt::b:p::p}, space s:::p, par b {comp label11::b:p::p, comp label13::b:p::p}, space u:::p, par t {comp tipoServidorCbx:::p::p, comp siapeTxt:::p::p}, space s:::p, comp dadosEnderecoPanel:::::x, space :::p}}"
+					} ) {
+						name: "dadosPanel"
+						"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label2"
+							"text": "Nome"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "nomeTxt"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "emailTxt"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label3"
+							"text": "E-mail"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label4"
+							"text": "Data Nascimento"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label1"
+							"text": "Dia"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label5"
+							"text": "Mês"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "diaTxt"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "mesTxt"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "anoTxt"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label6"
+							"text": "Ano"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label7"
+							"text": "Telefone"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label8"
+							"text": "Telefone 2"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label9"
+							"text": "RG"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label10"
+							"text": "CPF"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label11"
+							"text": "Tipo servidor"
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "tipoServidorCbx"
+							"model": new javax.swing.DefaultComboBoxModel {
+								selectedItem: "TAE"
+								addElement( "TAE" )
+								addElement( "Docente" )
+							}
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label13"
+							"text": "Siape"
+						} )
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+							"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par l {comp label14:::p::p, comp cepTxt::l:p:225:p}, space :224:248:x}, seq t {par l {comp label18:::p::p, comp cidadeCbx::l:p::p}, space ::113:x, par l {comp label15:::p::p, comp bairroTxt:::p:225:p}, space :p:11:p}, seq {par l {seq l {comp label16:::p::p, space :p:262:p, comp label17:::p::p}, seq l {comp descricaoTxt:::p:270:p, space s:::p, comp numeroTxt:::p:61:p}}, space :0:0:x}}}}"
+							"$verticalGroup": "par l {seq l {space :::p, comp label14:::p::p, space u:::p, comp cepTxt:::p::p, par l {seq {space :p:18:p, comp label15:::p::p, space :::x, comp bairroTxt:::p::p}, seq {space s:::x, comp label18:::p::p, space u:::p, comp cidadeCbx:::p::p}}, space :p:24:p, par l {seq t {comp label16:::p::p, space :p:1:p}, comp label17::t:p::p}, space u:::p, par t:::p {comp numeroTxt::t:p::p, comp descricaoTxt::t:p::p}, space ::11:x}}"
+						} ) {
+							name: "dadosEnderecoPanel"
+							"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
+							add( new FormComponent( "javax.swing.JLabel" ) {
+								name: "label14"
+								"text": "CEP"
+							} )
+							add( new FormComponent( "javax.swing.JTextField" ) {
+								name: "cepTxt"
+							} )
+							add( new FormComponent( "javax.swing.JTextField" ) {
+								name: "bairroTxt"
+							} )
+							add( new FormComponent( "javax.swing.JLabel" ) {
+								name: "label15"
+								"text": "Bairro"
+							} )
+							add( new FormComponent( "javax.swing.JTextField" ) {
+								name: "descricaoTxt"
+							} )
+							add( new FormComponent( "javax.swing.JLabel" ) {
+								name: "label16"
+								"text": "Rua"
+							} )
+							add( new FormComponent( "javax.swing.JLabel" ) {
+								name: "label17"
+								"text": "Nº"
+							} )
+							add( new FormComponent( "javax.swing.JTextField" ) {
+								name: "numeroTxt"
+							} )
+							add( new FormComponent( "javax.swing.JLabel" ) {
+								name: "label18"
+								"text": "Cidade"
+							} )
+							add( new FormComponent( "javax.swing.JComboBox" ) {
+								name: "cidadeCbx"
+								"model": new javax.swing.DefaultComboBoxModel {
+									selectedItem: "Tubarão"
+									addElement( "Tubarão" )
+								}
+							} )
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "foneTxt"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "fone2Txt"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "cpfTxt"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "rgTxt"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "siapeTxt"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "Center"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+					name: "buttonBar"
+					"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "novoBtn"
+						"text": "Novo"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "cancelarBtn"
+						"text": "Cancelar"
+						"enabled": false
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "gravarBtn"
+						"text": "Gravar"
+						"enabled": false
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buscarBtn"
+						"text": "Buscar"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "sairBtn"
+						"text": "Sair"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 525, 860 )
+		} )
+		add( new FormComponent( "javax.swing.JLabel" ) {
+			name: "id"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 715, 245 )
+		} )
+	}
+}

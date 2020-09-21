@@ -22,7 +22,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void cadastrar(Usuario usuario) {
-        Endereco endereco = enderecoService.consultar(usuario.getEndereco().getId());
+        Integer idEndereco = enderecoService.cadastrarRetornandoId(usuario.getEndereco());
+        Endereco endereco = enderecoService.consultar(idEndereco);
         usuarioDAO.create(new Usuario(endereco, usuario));
     }
 
@@ -39,6 +40,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void alterar(Integer id, Usuario usuario) {
         Endereco endereco = enderecoService.consultar(usuario.getEndereco().getId());
+        enderecoService.alterar(usuario.getEndereco().getId(), usuario.getEndereco());
         Usuario usuarioAtual = consultar(id);
         usuarioDAO.update(usuarioAtual.editar(endereco, usuario));
     }
@@ -52,9 +54,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Boolean logar(String username, String senha) {
         Optional<Usuario> usuario = usuarioDAO.logar(username, senha);
-        if (usuario.isPresent()) {
-            return true;
-        }
-        return false;
+        return usuario.isPresent();
     }
 }

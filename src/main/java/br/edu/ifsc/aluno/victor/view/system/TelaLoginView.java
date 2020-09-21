@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Sun Sep 20 18:28:06 BRT 2020
  */
 
-package br.edu.ifsc.aluno.victor.view;
+package br.edu.ifsc.aluno.victor.view.system;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

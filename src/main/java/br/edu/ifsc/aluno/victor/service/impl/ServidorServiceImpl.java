@@ -21,7 +21,8 @@ public class ServidorServiceImpl implements ServidorService {
 
     @Override
     public void cadastrar(Servidor servidor) {
-        Endereco endereco = enderecoService.consultar(servidor.getEndereco().getId());
+        Integer idEndereco = enderecoService.cadastrarRetornandoId(servidor.getEndereco());
+        Endereco endereco = enderecoService.consultar(idEndereco);
         servidorDAO.create(new Servidor(endereco, servidor));
     }
 
@@ -38,6 +39,7 @@ public class ServidorServiceImpl implements ServidorService {
     @Override
     public void alterar(Integer id, Servidor servidor) {
         Endereco endereco = enderecoService.consultar(servidor.getEndereco().getId());
+        enderecoService.alterar(servidor.getEndereco().getId(), servidor.getEndereco());
         Servidor servidorAtual = consultar(id);
         servidorDAO.update(servidorAtual.editar(endereco, servidor));
     }

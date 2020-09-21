@@ -1,0 +1,86 @@
+JFDML JFormDesigner: "7.0.2.6.321" Java: "11.0.7" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"title": "IFSC - Blocos"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+					name: "contentPanel"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+						name: "panel2"
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane1"
+							add( new FormComponent( "javax.swing.JTable" ) {
+								name: "listagemTbt"
+								"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
+								"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+									add( "id" )
+									add( null )
+								}, new java.util.Vector {
+									add( null )
+									add( null )
+								}, new java.util.Vector {
+									add( true )
+									add( null )
+								}, new java.util.Vector {
+									add( null )
+									add( null )
+								} )
+							} )
+						} )
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+					name: "buttonBar"
+					"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "cadastrarbtn"
+						"text": "Cadastrar"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "editarBtn"
+						"text": "Editar"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "deletarBtn"
+						"text": "Deletar"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "fecharBtn"
+						"text": "Fechar"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+					"alignment": 0
+				} ) {
+					name: "panel1"
+					"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "menuBtn"
+						"text": "<- Menu"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "tituloLbl"
+						"text": "Listagem de blocos"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "North"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 460, 300 )
+		} )
+	}
+}

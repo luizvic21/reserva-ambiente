@@ -185,4 +185,34 @@ public class EnderecoDAOJdbc implements EnderecoDAO {
 
         ConnectionFactory.closeConnection(connection, pstm);
     }
+
+    @Override
+    public Integer createReturnId(Endereco endereco) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Integer id = null;
+
+        String query = "INSERT INTO endereco (cep, descricao, numero, bairro, cidade_id) VALUES (?, ?, ?, ?, ?)";
+
+        try {
+            pstm = connection.prepareStatement(query);
+            pstm.setString(1, endereco.getCep());
+            pstm.setString(2, endereco.getDescricao());
+            pstm.setInt(3, endereco.getNumero());
+            pstm.setString(4, endereco.getBairro());
+            pstm.setInt(5, endereco.getCidade().getId());
+            pstm.executeUpdate();
+            rs = pstm.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection);
+            ex.printStackTrace();
+        }
+
+        ConnectionFactory.closeConnection(connection, pstm, rs);
+        return id;
+    }
 }

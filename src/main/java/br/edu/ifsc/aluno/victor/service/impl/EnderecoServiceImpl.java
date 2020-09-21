@@ -40,4 +40,10 @@ public class EnderecoServiceImpl implements EnderecoService {
         consultar(id);
         enderecoDAO.delete(id);
     }
+
+    @Override
+    public Integer cadastrarRetornandoId(Endereco endereco) {
+        Cidade cidade = cidadeService.consultar(endereco.getCidade().getId());
+        return  enderecoDAO.createReturnId(new Endereco(cidade, endereco));
+    }
 }
