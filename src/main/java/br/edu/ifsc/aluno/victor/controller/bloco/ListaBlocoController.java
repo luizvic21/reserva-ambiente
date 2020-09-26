@@ -43,7 +43,7 @@ public class ListaBlocoController implements ActionListener {
         if (e.getSource().equals(listaBlocoView.getCadastrarBtn())) {
             this.abrirFormularioCadastro();
         } else  if (e.getSource().equals(listaBlocoView.getEditarBtn())) {
-
+            this.clickEditar();
         } else  if (e.getSource().equals(listaBlocoView.getDeletarBtn())) {
             this.clickRemover();
         } else  if (e.getSource().equals(listaBlocoView.getFecharBtn())) {
@@ -84,13 +84,36 @@ public class ListaBlocoController implements ActionListener {
     private void clickRemover() {
         JTable listagem = this.listaBlocoView.getListagemTbt();
         if(listagem.getSelectedRow() > -1){
-            int codigoLinha = listagem.getSelectedRow();
-            Integer id = Integer.valueOf(listagem.getValueAt(codigoLinha, 0).toString());
-            this.blocoController.deletar(id);
-            DefaultTableModel dtm = (DefaultTableModel) listagem.getModel();
-            dtm.removeRow(codigoLinha);
+            this.remover(listagem);
         }else{
             MensagensUtils.ErroRemover();
+        }
+    }
+
+    private void remover(JTable tabela) {
+        int codigoLinha = tabela.getSelectedRow();
+        String descricao = tabela.getValueAt(codigoLinha, 1).toString();
+        int isRemover = MensagensUtils.RemoverMensagem("Bloco", descricao);
+        if (isRemover == 0) {
+            Integer id = Integer.valueOf(tabela.getValueAt(codigoLinha, 0).toString());
+            this.blocoController.deletar(id);
+            DefaultTableModel dtm = (DefaultTableModel) tabela.getModel();
+            dtm.removeRow(codigoLinha);
+        }
+    }
+
+    private void clickEditar() {
+        JTable listagem = this.listaBlocoView.getListagemTbt();
+        if(listagem.getSelectedRow() > -1){
+            int codigoLinha = listagem.getSelectedRow();
+            Integer id = Integer.parseInt(listagem.getValueAt(codigoLinha, 0).toString());
+
+            Bloco bloco = blocoController.consultarPorId(id);
+            FormularioBlocoView formularioBlocoView = new FormularioBlocoView(null);
+            formularioBlocoController.init(formularioBlocoView, bloco);
+            formularioBlocoController.abrir();
+        }else{
+            MensagensUtils.ErroEditar();
         }
     }
 }
