@@ -32,4 +32,8 @@ public class AmbienteController {
     public void deletar(Integer id) {
         ambienteService.deletar(id);
     }
+
+    public List<Ambiente> consultarPorBloco(Integer blocoId) {
+        return ambienteService.consultarPorBlocoId(blocoId);
+    }
 }

@@ -1,15 +1,14 @@
-package br.edu.ifsc.aluno.victor.controller.servidor;
+package br.edu.ifsc.aluno.victor.controller.disciplina;
 
 import br.edu.ifsc.aluno.victor.Utils.BotaoUtils;
-import br.edu.ifsc.aluno.victor.Utils.DateUtils;
 import br.edu.ifsc.aluno.victor.Utils.MensagensUtils;
 import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
-import br.edu.ifsc.aluno.victor.controller.ServidorController;
+import br.edu.ifsc.aluno.victor.controller.CursoDisciplinaController;
 import br.edu.ifsc.aluno.victor.controller.bloco.FormularioBlocoController;
 import br.edu.ifsc.aluno.victor.controller.system.MenuController;
-import br.edu.ifsc.aluno.victor.model.Servidor;
+import br.edu.ifsc.aluno.victor.model.CursoDisciplina;
 import br.edu.ifsc.aluno.victor.view.bloco.FormularioBlocoView;
-import br.edu.ifsc.aluno.victor.view.servidor.ListaServidorView;
+import br.edu.ifsc.aluno.victor.view.disciplina.ListaDisciplinaView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +19,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 @Service
-public class ListaServidorController implements ActionListener {
+public class ListaDisciplinaController implements ActionListener {
 
     @Autowired
-    private ServidorController servidorController;
+    private CursoDisciplinaController cursoDisciplinaController;
 
     @Autowired
     private MenuController menuController;
@@ -31,78 +30,70 @@ public class ListaServidorController implements ActionListener {
     @Autowired
     private FormularioBlocoController formularioBlocoController;
 
-    private ListaServidorView listaServidorView;
+    private ListaDisciplinaView listaDisciplinaView;
 
-    public void init(ListaServidorView listaServidorView) {
-        this.listaServidorView = listaServidorView;
-        this.listaServidorView.initButtons(this);
+    public void init(ListaDisciplinaView listaDisciplinaView) {
+        this.listaDisciplinaView = listaDisciplinaView;
+        this.listaDisciplinaView.initButtons(this);
         this.definirTabela();
         this.carregaLista();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(listaServidorView.getCadastrarBtn())) {
+        if (e.getSource().equals(listaDisciplinaView.getCadastrarBtn())) {
             this.abrirFormularioCadastro();
-        } else  if (e.getSource().equals(listaServidorView.getEditarBtn())) {
+        } else  if (e.getSource().equals(listaDisciplinaView.getEditarBtn())) {
             this.clickEditar();
-        } else  if (e.getSource().equals(listaServidorView.getDeletarBtn())) {
+        } else  if (e.getSource().equals(listaDisciplinaView.getDeletarBtn())) {
             this.clickRemover();
-        } else  if (e.getSource().equals(listaServidorView.getFecharBtn())) {
-            WindowUtils.Exit(listaServidorView);
-        } else  if (e.getSource().equals(listaServidorView.getMenuBtn())) {
-            BotaoUtils.VoltarMenu(listaServidorView, menuController);
+        } else  if (e.getSource().equals(listaDisciplinaView.getFecharBtn())) {
+            WindowUtils.Exit(listaDisciplinaView);
+        } else  if (e.getSource().equals(listaDisciplinaView.getMenuBtn())) {
+            BotaoUtils.VoltarMenu(listaDisciplinaView, menuController);
         }
     }
 
     public void abrir() {
-        this.listaServidorView.setVisible(true);
+        this.listaDisciplinaView.setVisible(true);
     }
 
     private void abrirFormularioCadastro() {
-        FormularioBlocoView formularioBlocoView = new FormularioBlocoView(listaServidorView);
+        FormularioBlocoView formularioBlocoView = new FormularioBlocoView(listaDisciplinaView);
         this.formularioBlocoController.init(formularioBlocoView);
         this.formularioBlocoController.abrir();
     }
 
     private void definirTabela() {
-        String[] colunas = {"Id", "Nome", "Data nascimento", "E-mail", "Siape", "Tipo servidor", "Telefone", "Telefone 2", "CPF", "RG", "Cidade", "Endereco", "Bairro", "CEP"};
-        this.listaServidorView.setColumnsNameListagem(colunas);
+        String[] colunas = {"Id", "Disciplina", "Curso", "Sigla", "Fase do curso", "Carga Horaria", "Docente"};
+        this.listaDisciplinaView.setColumnsNameListagem(colunas);
     }
 
     public void carregaLista() {
-        DefaultTableModel tabela = (DefaultTableModel) this.listaServidorView.getListagemTbt().getModel();
+        DefaultTableModel tabela = (DefaultTableModel) this.listaDisciplinaView.getListagemTbt().getModel();
         for (int i = 0; i < tabela.getRowCount(); i++) {
             tabela.removeRow(i);
-            this.listaServidorView.getListagemTbt().repaint();
+            this.listaDisciplinaView.getListagemTbt().repaint();
         }
         if (tabela.getRowCount() > 0) {
             tabela.removeRow(0);
         }
-        List<Servidor> servidores = servidorController.consultar();
-        servidores.forEach(servidor -> {
-            String endereco = String.format("%s, %d", servidor.getEndereco().getDescricao(), servidor.getEndereco().getNumero());
+        List<CursoDisciplina> disciplinas = cursoDisciplinaController.consultar();
+        disciplinas.forEach(disciplina -> {
             tabela.addRow(new Object[]{
-                    servidor.getId(),
-                    servidor.getNome(),
-                    DateUtils.toStringFormatBrasil(servidor.getDataNascimento()),
-                    servidor.getEmail(),
-                    servidor.getSiape(),
-                    servidor.getTipoServidor().getDescricao(),
-                    servidor.getFone(),
-                    servidor.getFone2(),
-                    servidor.getCpf(),
-                    servidor.getRg(),
-                    servidor.getEndereco().getCidade().getDescricao(),
-                    endereco,
-                    servidor.getEndereco().getBairro(),
-                    servidor.getEndereco().getCep()
+                    disciplina.getId(),
+                    disciplina.getDisciplina().getDescricao(),
+                    disciplina.getCurso().getDescricao(),
+                    disciplina.getSiglaCurso(),
+                    disciplina.getFaseCurso(),
+                    disciplina.getCargaHoraria(),
+                    disciplina.getDocente().getNome()
             });
         });
     }
 
     private void clickRemover() {
-        JTable listagem = this.listaServidorView.getListagemTbt();
+        JTable listagem = this.listaDisciplinaView.getListagemTbt();
         if(listagem.getSelectedRow() > -1){
             this.remover(listagem);
         }else{
@@ -116,7 +107,7 @@ public class ListaServidorController implements ActionListener {
         int isRemover = MensagensUtils.RemoverMensagem("Bloco", descricao);
         if (isRemover == 0) {
             Integer id = Integer.valueOf(tabela.getValueAt(codigoLinha, 0).toString());
-            this.servidorController.deletar(id);
+            this.cursoDisciplinaController.deletar(id);
             DefaultTableModel dtm = (DefaultTableModel) tabela.getModel();
             dtm.removeRow(codigoLinha);
         }

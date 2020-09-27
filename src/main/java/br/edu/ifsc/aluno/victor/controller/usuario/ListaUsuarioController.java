@@ -1,15 +1,15 @@
-package br.edu.ifsc.aluno.victor.controller.servidor;
+package br.edu.ifsc.aluno.victor.controller.usuario;
 
 import br.edu.ifsc.aluno.victor.Utils.BotaoUtils;
 import br.edu.ifsc.aluno.victor.Utils.DateUtils;
 import br.edu.ifsc.aluno.victor.Utils.MensagensUtils;
 import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
-import br.edu.ifsc.aluno.victor.controller.ServidorController;
+import br.edu.ifsc.aluno.victor.controller.UsuarioController;
 import br.edu.ifsc.aluno.victor.controller.bloco.FormularioBlocoController;
 import br.edu.ifsc.aluno.victor.controller.system.MenuController;
-import br.edu.ifsc.aluno.victor.model.Servidor;
+import br.edu.ifsc.aluno.victor.model.Usuario;
 import br.edu.ifsc.aluno.victor.view.bloco.FormularioBlocoView;
-import br.edu.ifsc.aluno.victor.view.servidor.ListaServidorView;
+import br.edu.ifsc.aluno.victor.view.usuario.ListaUsuarioView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +20,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 @Service
-public class ListaServidorController implements ActionListener {
+public class ListaUsuarioController implements ActionListener {
 
     @Autowired
-    private ServidorController servidorController;
+    private UsuarioController usuarioController;
 
     @Autowired
     private MenuController menuController;
@@ -31,78 +31,77 @@ public class ListaServidorController implements ActionListener {
     @Autowired
     private FormularioBlocoController formularioBlocoController;
 
-    private ListaServidorView listaServidorView;
+    private ListaUsuarioView listaUsuarioView;
 
-    public void init(ListaServidorView listaServidorView) {
-        this.listaServidorView = listaServidorView;
-        this.listaServidorView.initButtons(this);
+    public void init(ListaUsuarioView listaUsuarioView) {
+        this.listaUsuarioView = listaUsuarioView;
+        this.listaUsuarioView.initButtons(this);
         this.definirTabela();
         this.carregaLista();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(listaServidorView.getCadastrarBtn())) {
+        if (e.getSource().equals(listaUsuarioView.getCadastrarBtn())) {
             this.abrirFormularioCadastro();
-        } else  if (e.getSource().equals(listaServidorView.getEditarBtn())) {
+        } else  if (e.getSource().equals(listaUsuarioView.getEditarBtn())) {
             this.clickEditar();
-        } else  if (e.getSource().equals(listaServidorView.getDeletarBtn())) {
+        } else  if (e.getSource().equals(listaUsuarioView.getDeletarBtn())) {
             this.clickRemover();
-        } else  if (e.getSource().equals(listaServidorView.getFecharBtn())) {
-            WindowUtils.Exit(listaServidorView);
-        } else  if (e.getSource().equals(listaServidorView.getMenuBtn())) {
-            BotaoUtils.VoltarMenu(listaServidorView, menuController);
+        } else  if (e.getSource().equals(listaUsuarioView.getFecharBtn())) {
+            WindowUtils.Exit(listaUsuarioView);
+        } else  if (e.getSource().equals(listaUsuarioView.getMenuBtn())) {
+            BotaoUtils.VoltarMenu(listaUsuarioView, menuController);
         }
     }
 
     public void abrir() {
-        this.listaServidorView.setVisible(true);
+        this.listaUsuarioView.setVisible(true);
     }
 
     private void abrirFormularioCadastro() {
-        FormularioBlocoView formularioBlocoView = new FormularioBlocoView(listaServidorView);
+        FormularioBlocoView formularioBlocoView = new FormularioBlocoView(listaUsuarioView);
         this.formularioBlocoController.init(formularioBlocoView);
         this.formularioBlocoController.abrir();
     }
 
     private void definirTabela() {
-        String[] colunas = {"Id", "Nome", "Data nascimento", "E-mail", "Siape", "Tipo servidor", "Telefone", "Telefone 2", "CPF", "RG", "Cidade", "Endereco", "Bairro", "CEP"};
-        this.listaServidorView.setColumnsNameListagem(colunas);
+        String[] colunas = {"Id", "Nome", "Username", "Data nascimento", "E-mail", "Telefone", "Telefone 2", "CPF", "RG", "Cidade", "Endereco", "Bairro", "CEP"};
+        this.listaUsuarioView.setColumnsNameListagem(colunas);
     }
 
     public void carregaLista() {
-        DefaultTableModel tabela = (DefaultTableModel) this.listaServidorView.getListagemTbt().getModel();
+        DefaultTableModel tabela = (DefaultTableModel) this.listaUsuarioView.getListagemTbt().getModel();
         for (int i = 0; i < tabela.getRowCount(); i++) {
             tabela.removeRow(i);
-            this.listaServidorView.getListagemTbt().repaint();
+            this.listaUsuarioView.getListagemTbt().repaint();
         }
         if (tabela.getRowCount() > 0) {
             tabela.removeRow(0);
         }
-        List<Servidor> servidores = servidorController.consultar();
-        servidores.forEach(servidor -> {
-            String endereco = String.format("%s, %d", servidor.getEndereco().getDescricao(), servidor.getEndereco().getNumero());
+        List<Usuario> usuarios = usuarioController.consultar();
+        usuarios.forEach(usuario -> {
+            String endereco = String.format("%s, %d", usuario.getEndereco().getDescricao(), usuario.getEndereco().getNumero());
             tabela.addRow(new Object[]{
-                    servidor.getId(),
-                    servidor.getNome(),
-                    DateUtils.toStringFormatBrasil(servidor.getDataNascimento()),
-                    servidor.getEmail(),
-                    servidor.getSiape(),
-                    servidor.getTipoServidor().getDescricao(),
-                    servidor.getFone(),
-                    servidor.getFone2(),
-                    servidor.getCpf(),
-                    servidor.getRg(),
-                    servidor.getEndereco().getCidade().getDescricao(),
+                    usuario.getId(),
+                    usuario.getNome(),
+                    DateUtils.toStringFormatBrasil(usuario.getDataNascimento()),
+                    usuario.getEmail(),
+                    usuario.getUsername(),
+                    usuario.getFone(),
+                    usuario.getFone2(),
+                    usuario.getCpf(),
+                    usuario.getRg(),
+                    usuario.getEndereco().getCidade().getDescricao(),
                     endereco,
-                    servidor.getEndereco().getBairro(),
-                    servidor.getEndereco().getCep()
+                    usuario.getEndereco().getBairro(),
+                    usuario.getEndereco().getCep()
             });
         });
     }
 
     private void clickRemover() {
-        JTable listagem = this.listaServidorView.getListagemTbt();
+        JTable listagem = this.listaUsuarioView.getListagemTbt();
         if(listagem.getSelectedRow() > -1){
             this.remover(listagem);
         }else{
@@ -116,7 +115,7 @@ public class ListaServidorController implements ActionListener {
         int isRemover = MensagensUtils.RemoverMensagem("Bloco", descricao);
         if (isRemover == 0) {
             Integer id = Integer.valueOf(tabela.getValueAt(codigoLinha, 0).toString());
-            this.servidorController.deletar(id);
+            this.usuarioController.deletar(id);
             DefaultTableModel dtm = (DefaultTableModel) tabela.getModel();
             dtm.removeRow(codigoLinha);
         }

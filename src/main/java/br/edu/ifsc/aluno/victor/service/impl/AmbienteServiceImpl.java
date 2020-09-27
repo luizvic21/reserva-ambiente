@@ -46,4 +46,9 @@ public class AmbienteServiceImpl implements AmbienteService {
     public void deletar(Integer id) {
         ambienteDAO.delete(id);
     }
+
+    @Override
+    public List<Ambiente> consultarPorBlocoId(Integer blocoId) {
+        return ambienteDAO.findByBlocoId(blocoId);
+    }
 }

@@ -68,10 +68,6 @@ public class ListaBlocoView extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         dialogPane = new JPanel();
-        contentPanel = new JPanel();
-        panel2 = new JPanel();
-        scrollPane1 = new JScrollPane();
-        listagemTbt = new JTable();
         buttonBar = new JPanel();
         cadastrarBtn = new JButton();
         editarBtn = new JButton();
@@ -80,58 +76,34 @@ public class ListaBlocoView extends JFrame {
         panel1 = new JPanel();
         menuBtn = new JButton();
         tituloLbl = new JLabel();
+        contentPanel = new JPanel();
+        panel2 = new JPanel();
+        scrollPane1 = new JScrollPane();
+        listagemTbt = new JTable();
 
         //======== this ========
         setTitle("IFSC - Blocos");
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
-            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing
-            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
-            Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
-            ) ,dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
-            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName (
-            ) )) throw new RuntimeException( ); }} );
+            dialogPane.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder
+            (0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax.swing.border
+            .TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt
+            .Color.red),dialogPane. getBorder()));dialogPane. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void
+            propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException()
+            ;}});
             dialogPane.setLayout(new BorderLayout());
-
-            //======== contentPanel ========
-            {
-                contentPanel.setLayout(new FlowLayout());
-
-                //======== panel2 ========
-                {
-                    panel2.setLayout(new FlowLayout());
-
-                    //======== scrollPane1 ========
-                    {
-
-                        //---- listagemTbt ----
-                        listagemTbt.setBorder(new BevelBorder(BevelBorder.RAISED));
-                        listagemTbt.setModel(new DefaultTableModel(
-                            new Object[][] {
-                            },
-                            new String[] {
-                                "id", null
-                            }
-                        ));
-                        scrollPane1.setViewportView(listagemTbt);
-                    }
-                    panel2.add(scrollPane1);
-                }
-                contentPanel.add(panel2);
-            }
-            dialogPane.add(contentPanel, BorderLayout.CENTER);
 
             //======== buttonBar ========
             {
                 buttonBar.setBorder(new BevelBorder(BevelBorder.RAISED));
                 buttonBar.setLayout(new FlowLayout());
 
-                //---- cadastrarbtn ----
+                //---- cadastrarBtn ----
                 cadastrarBtn.setText("Cadastrar");
                 buttonBar.add(cadastrarBtn);
 
@@ -163,6 +135,28 @@ public class ListaBlocoView extends JFrame {
                 panel1.add(tituloLbl);
             }
             dialogPane.add(panel1, BorderLayout.NORTH);
+
+            //======== contentPanel ========
+            {
+                contentPanel.setLayout(new BorderLayout());
+
+                //======== panel2 ========
+                {
+                    panel2.setBorder(new BevelBorder(BevelBorder.RAISED));
+                    panel2.setLayout(new BorderLayout());
+
+                    //======== scrollPane1 ========
+                    {
+
+                        //---- listagemTbt ----
+                        listagemTbt.setModel(new DefaultTableModel(2, 0));
+                        scrollPane1.setViewportView(listagemTbt);
+                    }
+                    panel2.add(scrollPane1, BorderLayout.CENTER);
+                }
+                contentPanel.add(panel2, BorderLayout.CENTER);
+            }
+            dialogPane.add(contentPanel, BorderLayout.CENTER);
         }
         contentPane.add(dialogPane, BorderLayout.CENTER);
         pack();
@@ -173,10 +167,6 @@ public class ListaBlocoView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
     private JPanel dialogPane;
-    private JPanel contentPanel;
-    private JPanel panel2;
-    private JScrollPane scrollPane1;
-    private JTable listagemTbt;
     private JPanel buttonBar;
     private JButton cadastrarBtn;
     private JButton editarBtn;
@@ -185,5 +175,9 @@ public class ListaBlocoView extends JFrame {
     private JPanel panel1;
     private JButton menuBtn;
     private JLabel tituloLbl;
+    private JPanel contentPanel;
+    private JPanel panel2;
+    private JScrollPane scrollPane1;
+    private JTable listagemTbt;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

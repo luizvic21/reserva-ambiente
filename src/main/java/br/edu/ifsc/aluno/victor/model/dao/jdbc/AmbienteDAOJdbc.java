@@ -183,4 +183,54 @@ public class AmbienteDAOJdbc implements AmbienteDAO {
 
         ConnectionFactory.closeConnection(connection, pstm);
     }
+
+    @Override
+    public List<Ambiente> findByBlocoId(Integer blocoId) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement pstm;
+        ResultSet rs;
+
+        String query = "SELECT\n" +
+                "    a.id as ambiente_id,\n" +
+                "    a.descricao as ambiente_descricao,\n" +
+                "    sigla,\n" +
+                "    a.foto as ambiente_foto,\n" +
+                "    chave_acesso,\n" +
+                "    bloco_id,\n" +
+                "    b.descricao as bloco_descricao,\n" +
+                "    b.foto as bloco_foto\n" +
+                "FROM\n" +
+                "    ambiente a\n" +
+                "    join bloco b on a.bloco_id = b.id\n" +
+                "WHERE \n" +
+                "    b.id = ?";
+
+        try {
+            ArrayList<Ambiente> ambientes = new ArrayList<>();
+            pstm = connection.prepareStatement(query);
+            pstm.setInt(1, blocoId);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                Bloco bloco = new Bloco(rs.getInt("bloco_id"), rs.getString("bloco_descricao"), rs.getString("bloco_foto"));
+                Ambiente ambiente = new Ambiente(
+                        rs.getInt("ambiente_id"),
+                        rs.getString("ambiente_descricao"),
+                        rs.getString("sigla"),
+                        rs.getString("ambiente_foto"),
+                        rs.getString("chave_acesso"),
+                        bloco);
+                ambientes.add(ambiente);
+            }
+
+            ConnectionFactory.closeConnection(connection, pstm, rs);
+
+            return ambientes;
+        } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection);
+            ex.printStackTrace();
+        }
+
+        return new ArrayList<>();
+    }
 }

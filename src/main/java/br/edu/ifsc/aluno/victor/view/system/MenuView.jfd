@@ -8,6 +8,7 @@ new FormModel {
 		} ) {
 			name: "this"
 			"title": "Menu"
+			"defaultCloseOperation": 3
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) {
 				"hgap": 500
 			} ) {

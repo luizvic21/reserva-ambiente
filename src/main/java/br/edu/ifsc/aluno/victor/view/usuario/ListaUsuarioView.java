@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Sun Sep 20 21:09:30 BRT 2020
  */
 
-package br.edu.ifsc.aluno.victor.view;
+package br.edu.ifsc.aluno.victor.view.usuario;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -15,8 +15,8 @@ import java.awt.event.ActionListener;
 /**
  * @author unknown
  */
-public class ListaTempleteView extends JFrame {
-    public ListaTempleteView() {
+public class ListaUsuarioView extends JFrame {
+    public ListaUsuarioView() {
         initComponents();
     }
 
@@ -53,7 +53,7 @@ public class ListaTempleteView extends JFrame {
     }
 
     public void setColumnsNameListagem(String[] colunas) {
-        TableModel tableModel = new javax.swing.table.DefaultTableModel(
+        TableModel tableModel = new DefaultTableModel(
                 new Object [][] {
 
                 },
@@ -81,6 +81,7 @@ public class ListaTempleteView extends JFrame {
 
         //======== this ========
         setTitle("IFSC - ");
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -88,12 +89,11 @@ public class ListaTempleteView extends JFrame {
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
             dialogPane.setForeground(Color.white);
-            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-            EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
-            . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
-            java. awt. Color. red) ,dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
-            throw new RuntimeException( ); }} );
+            dialogPane.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0
+            ,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
+            ,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt.Color.red),
+            dialogPane. getBorder()));dialogPane. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
+            ){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}});
             dialogPane.setLayout(new BorderLayout());
 
             //======== buttonBar ========

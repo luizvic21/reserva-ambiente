@@ -11,4 +11,5 @@ public interface AmbienteService {
     List<Ambiente> consultar();
     void alterar(Integer id, Ambiente ambiente);
     void deletar(Integer id);
+    List<Ambiente> consultarPorBlocoId(Integer blocoId);
 }

@@ -1,5 +1,6 @@
 package br.edu.ifsc.aluno.victor;
 
+import br.edu.ifsc.aluno.victor.controller.AmbienteController;
 import br.edu.ifsc.aluno.victor.controller.system.LoginController;
 import br.edu.ifsc.aluno.victor.controller.system.MenuController;
 import br.edu.ifsc.aluno.victor.view.system.MenuView;
@@ -15,6 +16,9 @@ public class ApplicationService {
     @Autowired
     private MenuController menuController;
 
+    @Autowired
+    private AmbienteController ambienteController;
+
     public void execute() {
 //        TelaLoginView telaLoginView = new TelaLoginView(null);
 //        loginController.init(telaLoginView);
@@ -26,5 +30,6 @@ public class ApplicationService {
 //        listaTempleteView.setVisible(true);
 //        FormularioServidorView formularioServidorView = new FormularioServidorView(null);
 //        formularioServidorView.setVisible(true);
+//        System.out.println(ambienteController.consultarPorId(1));
     }
 }
