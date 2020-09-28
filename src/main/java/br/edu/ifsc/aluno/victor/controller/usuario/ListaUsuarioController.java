@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ListaUsuarioController implements ActionListener {
@@ -133,5 +134,9 @@ public class ListaUsuarioController implements ActionListener {
         }else{
             MensagensUtils.ErroEditar();
         }
+    }
+
+    public boolean isAtivo() {
+        return Objects.nonNull(this.listaUsuarioView);
     }
 }

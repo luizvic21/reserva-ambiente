@@ -4,10 +4,9 @@ import br.edu.ifsc.aluno.victor.Utils.BotaoUtils;
 import br.edu.ifsc.aluno.victor.Utils.MensagensUtils;
 import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
 import br.edu.ifsc.aluno.victor.controller.CursoController;
-import br.edu.ifsc.aluno.victor.controller.bloco.FormularioBlocoController;
 import br.edu.ifsc.aluno.victor.controller.system.MenuController;
 import br.edu.ifsc.aluno.victor.model.Curso;
-import br.edu.ifsc.aluno.victor.view.bloco.FormularioBlocoView;
+import br.edu.ifsc.aluno.victor.view.curso.FormularioCursoView;
 import br.edu.ifsc.aluno.victor.view.curso.ListaCursoView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,7 @@ public class ListaCursoController implements ActionListener {
     private MenuController menuController;
 
     @Autowired
-    private FormularioBlocoController formularioBlocoController;
+    private FormularioCursoController formularioCursoController;
 
     private ListaCursoView listaCursoView;
 
@@ -59,9 +58,9 @@ public class ListaCursoController implements ActionListener {
     }
 
     private void abrirFormularioCadastro() {
-        FormularioBlocoView formularioBlocoView = new FormularioBlocoView(listaCursoView);
-        this.formularioBlocoController.init(formularioBlocoView);
-        this.formularioBlocoController.abrir();
+        FormularioCursoView formularioCursoView = new FormularioCursoView(listaCursoView);
+        this.formularioCursoController.init(formularioCursoView);
+        this.formularioCursoController.abrir();
     }
 
     private void definirTabela() {
@@ -112,17 +111,17 @@ public class ListaCursoController implements ActionListener {
     }
 
     private void clickEditar() {
-//        JTable listagem = this.listaServidorView.getListagemTbt();
-//        if(listagem.getSelectedRow() > -1){
-//            int codigoLinha = listagem.getSelectedRow();
-//            Integer id = Integer.parseInt(listagem.getValueAt(codigoLinha, 0).toString());
-//
-//            Bloco bloco = servidorController.consultarPorId(id);
-//            FormularioBlocoView formularioBlocoView = new FormularioBlocoView(null);
-//            formularioBlocoController.init(formularioBlocoView, bloco);
-//            formularioBlocoController.abrir();
-//        }else{
-//            MensagensUtils.ErroEditar();
-//        }
+        JTable listagem = this.listaCursoView.getListagemTbt();
+        if(listagem.getSelectedRow() > -1){
+            int codigoLinha = listagem.getSelectedRow();
+            Integer id = Integer.parseInt(listagem.getValueAt(codigoLinha, 0).toString());
+
+            Curso curso = cursoController.consultarPorId(id);
+            FormularioCursoView formularioCursoView = new FormularioCursoView(null);
+            formularioCursoController.init(formularioCursoView, curso);
+            formularioCursoController.abrir();
+        }else{
+            MensagensUtils.ErroEditar();
+        }
     }
 }

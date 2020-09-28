@@ -40,7 +40,7 @@ public class FormularioUsuarioController implements ActionListener {
         this.formularioUsuarioView.initButtons(this);
         this.formularioUsuarioView.ativarBotoes(true);
         this.formularioUsuarioView.ativaInputs(true);
-        this.formularioUsuarioView.setTituloLbl("Cadastrar Usuario");
+        this.formularioUsuarioView.setTituloLbl("Cadastrar usuario");
     }
 
     public void init(FormularioUsuarioView formularioUsuarioView, Usuario usuario) {
@@ -104,7 +104,9 @@ public class FormularioUsuarioController implements ActionListener {
     }
 
     private void clickSair() {
-        this.listaUsuarioController.carregaLista();
+        if (this.listaUsuarioController.isAtivo()) {
+            this.listaUsuarioController.carregaLista();
+        }
         this.formularioUsuarioView.dispose();
     }
 }

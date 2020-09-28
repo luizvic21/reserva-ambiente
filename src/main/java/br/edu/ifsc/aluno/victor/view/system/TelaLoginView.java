@@ -33,6 +33,10 @@ public class TelaLoginView extends JDialog {
         return cancelarBtn;
     }
 
+    public JButton getCriarUsuarioBtn() {
+        return criarUsuarioBtn;
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -43,6 +47,7 @@ public class TelaLoginView extends JDialog {
         usernameTxt = new JTextField();
         label3 = new JLabel();
         senhaTxt = new JPasswordField();
+        criarUsuarioBtn = new JButton();
         buttonBar = new JPanel();
         entrarBtn = new JButton();
         cancelarBtn = new JButton();
@@ -56,13 +61,12 @@ public class TelaLoginView extends JDialog {
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
-            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-            .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (new java. beans.
-            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .
-            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            dialogPane.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
+            EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax . swing
+            . border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,
+            java . awt. Color .red ) ,dialogPane. getBorder () ) ); dialogPane. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
+            { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )
+            throw new RuntimeException( ) ;} } );
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
@@ -76,6 +80,9 @@ public class TelaLoginView extends JDialog {
 
                 //---- label3 ----
                 label3.setText("Senha");
+
+                //---- criarUsuarioBtn ----
+                criarUsuarioBtn.setText("Criar usuario");
 
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
@@ -91,14 +98,15 @@ public class TelaLoginView extends JDialog {
                             .addContainerGap())
                         .addGroup(contentPanelLayout.createSequentialGroup()
                             .addContainerGap()
-                            .addGroup(contentPanelLayout.createParallelGroup()
-                                .addComponent(label2)
-                                .addComponent(label3))
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addContainerGap()
                             .addComponent(senhaTxt)
                             .addContainerGap())
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(contentPanelLayout.createParallelGroup()
+                                .addComponent(label2)
+                                .addComponent(label3)
+                                .addComponent(criarUsuarioBtn, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
                 contentPanelLayout.setVerticalGroup(
                     contentPanelLayout.createParallelGroup()
@@ -112,7 +120,8 @@ public class TelaLoginView extends JDialog {
                             .addComponent(label3)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(senhaTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 39, Short.MAX_VALUE))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                            .addComponent(criarUsuarioBtn, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -153,6 +162,7 @@ public class TelaLoginView extends JDialog {
     private JTextField usernameTxt;
     private JLabel label3;
     private JPasswordField senhaTxt;
+    private JButton criarUsuarioBtn;
     private JPanel buttonBar;
     private JButton entrarBtn;
     private JButton cancelarBtn;

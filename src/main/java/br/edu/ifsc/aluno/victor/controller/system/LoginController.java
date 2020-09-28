@@ -2,8 +2,10 @@ package br.edu.ifsc.aluno.victor.controller.system;
 
 import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
 import br.edu.ifsc.aluno.victor.controller.UsuarioController;
+import br.edu.ifsc.aluno.victor.controller.usuario.FormularioUsuarioController;
 import br.edu.ifsc.aluno.victor.view.system.MenuView;
 import br.edu.ifsc.aluno.victor.view.system.TelaLoginView;
+import br.edu.ifsc.aluno.victor.view.usuario.FormularioUsuarioView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +22,16 @@ public class LoginController implements ActionListener {
     @Autowired
     private MenuController menuController;
 
+    @Autowired
+    private FormularioUsuarioController formularioUsuarioController;
+
     private TelaLoginView telaLoginView;
 
     public void init(TelaLoginView telaLoginView) {
         this.telaLoginView = telaLoginView;
         this.telaLoginView.getEntrarBtn().addActionListener(this);
         this.telaLoginView.getCancelarBtn().addActionListener(this);
+        this.telaLoginView.getCriarUsuarioBtn().addActionListener(this);
     }
 
     @Override
@@ -34,6 +40,8 @@ public class LoginController implements ActionListener {
             this.logar();
         } else if (e.getSource().equals(this.telaLoginView.getCancelarBtn())) {
             this.fechar();
+        } else if (e.getSource().equals(this.telaLoginView.getCriarUsuarioBtn())) {
+            abrirFormularioCadastro();
         }
     }
 
@@ -59,5 +67,11 @@ public class LoginController implements ActionListener {
 
     private void fechar() {
         WindowUtils.Exit(telaLoginView);
+    }
+
+    private void abrirFormularioCadastro() {
+        FormularioUsuarioView formularioUsuarioView = new FormularioUsuarioView(null);
+        this.formularioUsuarioController.init(formularioUsuarioView);
+        this.formularioUsuarioController.abrir();
     }
 }

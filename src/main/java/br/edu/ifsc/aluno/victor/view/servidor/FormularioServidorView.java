@@ -121,7 +121,7 @@ public class FormularioServidorView extends JDialog {
         this.bairroTxt.setText(servidor.getEndereco().getBairro());
         this.numeroTxt.setText(String.valueOf(servidor.getEndereco().getNumero()));
         this.cidadeCbx.addItem(servidor.getEndereco().getCidade().getDescricao());
-        this.tipoServidorCbx.addItem(servidor.getTipoServidor().getDescricao());
+        this.tipoServidorCbx.addItem(servidor.getTipoServidor().toString());
     }
 
     public void initButtons(ActionListener actionListener) {

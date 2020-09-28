@@ -11,8 +11,8 @@ new FormModel {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :p:153:p, comp label1:::::x, space :p:146:p}, seq t {space :::p, comp usernameTxt:::::x, space :::p}, seq l {space :::p, par l {comp label2:::p::p, comp label3::l:p::p}, space :::x}, seq l {space :::p, comp senhaTxt:::::x, space :::p}}"
-					"$verticalGroup": "par l {seq l {comp label1:::p::p, space s:::p, comp label2:::p::p, space u:::p, comp usernameTxt:::p::p, space s:::p, comp label3:::p::p, space u:::p, comp senhaTxt:::p::p, space :0:39:x}}"
+					"$horizontalGroup": "par l {seq {space :p:153:p, comp label1:::::x, space :p:146:p}, seq t {space :::p, comp usernameTxt:::::x, space :::p}, seq l {space :::p, comp senhaTxt:::::x, space :::p}, seq {space :::p, par l {comp label2:::p::p, comp label3::l:p::p, comp criarUsuarioBtn::l:p:132:p}, space :::x}}"
+					"$verticalGroup": "par l {seq l {comp label1:::p::p, space s:::p, comp label2:::p::p, space u:::p, comp usernameTxt:::p::p, space s:::p, comp label3:::p::p, space u:::p, comp senhaTxt:::p::p, space ::18:x, comp criarUsuarioBtn:::p:21:p}}"
 				} ) {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -32,6 +32,10 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JPasswordField" ) {
 						name: "senhaTxt"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "criarUsuarioBtn"
+						"text": "Criar usuario"
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"
