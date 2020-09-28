@@ -2,13 +2,12 @@
  * Created by JFormDesigner on Sun Sep 20 21:47:54 BRT 2020
  */
 
-package br.edu.ifsc.aluno.victor.view.servidor;
+package br.edu.ifsc.aluno.victor.view.usuario;
 
 import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
-import br.edu.ifsc.aluno.victor.enuns.EnumTipoServidor;
 import br.edu.ifsc.aluno.victor.model.Cidade;
 import br.edu.ifsc.aluno.victor.model.Endereco;
-import br.edu.ifsc.aluno.victor.model.Servidor;
+import br.edu.ifsc.aluno.victor.model.Usuario;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -21,8 +20,8 @@ import java.util.List;
 /**
  * @author unknown
  */
-public class FormularioServidorView extends JDialog {
-    public FormularioServidorView(Window owner) {
+public class FormularioUsuarioView extends JDialog {
+    public FormularioUsuarioView(Window owner) {
         super(owner);
         initComponents();
         idLbl.setText("");
@@ -60,10 +59,12 @@ public class FormularioServidorView extends JDialog {
         this.tituloLbl.setText(titulo);
     }
 
-    public Servidor getDados() {
+    public Usuario getDados() {
         Integer id = idLbl.getText().isEmpty() ? null : Integer.parseInt(idLbl.getText());
         String nome = this.nomeTxt.getText();
         String email = this.emailTxt.getText();
+        String username = this.usernameTxt.getText();
+        String senha = this.senhaTxt.getText();
         Integer dia = Integer.parseInt(this.diaTxt.getText());
         Integer mes = Integer.parseInt(this.mesTxt.getText());
         Integer ano = Integer.parseInt(this.anoTxt.getText());
@@ -71,16 +72,14 @@ public class FormularioServidorView extends JDialog {
         String fone2 = this.fone2Txt.getText();
         String cpf = this.cpfTxt.getText();
         String rg = this.rgTxt.getText();
-        String siape = this.siapeTxt.getText();
         String cep = this.cepTxt.getText();
         String descricao = this.descricaoTxt.getText();
         String bairro = this.bairroTxt.getText();
         Integer numero = Integer.parseInt(this.numeroTxt.getText());
-        EnumTipoServidor tipoServidor = EnumTipoServidor.valueOf((String) this.tipoServidorCbx.getSelectedItem());
         LocalDate dataNascimento = LocalDate.of(ano, mes, dia);
         Cidade cidade = new Cidade(null,(String) cidadeCbx.getSelectedItem());
         Endereco endereco = new Endereco(null, cep, descricao, numero, bairro, cidade);
-        return new Servidor(id, nome, dataNascimento, fone, fone2, email, cpf, rg, endereco, siape, tipoServidor, null);
+        return new Usuario(id, nome, dataNascimento, fone, fone2, email, cpf, rg, endereco, username, senha);
     }
 
     public void resetar() {
@@ -94,34 +93,34 @@ public class FormularioServidorView extends JDialog {
             this.fone2Txt.setText("");
             this.cpfTxt.setText("");
             this.rgTxt.setText("");
-            this.siapeTxt.setText("");
+            this.usernameTxt.setText("");
+            this.senhaTxt.setText("");
             this.cepTxt.setText("");
             this.descricaoTxt.setText("");
             this.bairroTxt.setText("");
             this.numeroTxt.setText("");
             cidadeCbx.removeAllItems();
-            tipoServidorCbx.removeAllItems();
         }
     }
 
-    public void setDados(Servidor servidor) {
-        this.idLbl.setText(String.valueOf(servidor.getId()));
-        this.nomeTxt.setText(servidor.getNome());
-        this.emailTxt.setText(servidor.getEmail());
-        this.diaTxt.setText(String.valueOf(servidor.getDataNascimento().getDayOfMonth()));
-        this.mesTxt.setText(String.valueOf(servidor.getDataNascimento().getMonthValue()));
-        this.anoTxt.setText(String.valueOf(servidor.getDataNascimento().getYear()));
-        this.foneTxt.setText(servidor.getFone());
-        this.fone2Txt.setText(servidor.getFone2());
-        this.cpfTxt.setText(servidor.getCpf());
-        this.rgTxt.setText(servidor.getRg());
-        this.siapeTxt.setText(servidor.getSiape());
-        this.cepTxt.setText(servidor.getEndereco().getCep());
-        this.descricaoTxt.setText(servidor.getEndereco().getDescricao());
-        this.bairroTxt.setText(servidor.getEndereco().getBairro());
-        this.numeroTxt.setText(String.valueOf(servidor.getEndereco().getNumero()));
-        this.cidadeCbx.addItem(servidor.getEndereco().getCidade().getDescricao());
-        this.tipoServidorCbx.addItem(servidor.getTipoServidor().getDescricao());
+    public void setDados(Usuario usuario) {
+        this.idLbl.setText(String.valueOf(usuario.getId()));
+        this.nomeTxt.setText(usuario.getNome());
+        this.emailTxt.setText(usuario.getEmail());
+        this.diaTxt.setText(String.valueOf(usuario.getDataNascimento().getDayOfMonth()));
+        this.mesTxt.setText(String.valueOf(usuario.getDataNascimento().getMonthValue()));
+        this.anoTxt.setText(String.valueOf(usuario.getDataNascimento().getYear()));
+        this.foneTxt.setText(usuario.getFone());
+        this.fone2Txt.setText(usuario.getFone2());
+        this.cpfTxt.setText(usuario.getCpf());
+        this.rgTxt.setText(usuario.getRg());
+        this.usernameTxt.setText(usuario.getUsername());
+        this.senhaTxt.setText(usuario.getSenha());
+        this.cepTxt.setText(usuario.getEndereco().getCep());
+        this.descricaoTxt.setText(usuario.getEndereco().getDescricao());
+        this.bairroTxt.setText(usuario.getEndereco().getBairro());
+        this.numeroTxt.setText(String.valueOf(usuario.getEndereco().getNumero()));
+        this.cidadeCbx.addItem(usuario.getEndereco().getCidade().getDescricao());
     }
 
     public void initButtons(ActionListener actionListener) {
@@ -149,12 +148,6 @@ public class FormularioServidorView extends JDialog {
         cidades.forEach(cidade -> cidadeCbx.addItem(cidade.getDescricao()));
     }
 
-    public void setTipoServidorCbx() {
-        for (EnumTipoServidor tipoServidor : EnumTipoServidor.values()) {
-            tipoServidorCbx.addItem(tipoServidor.toString());
-        }
-    }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -178,9 +171,6 @@ public class FormularioServidorView extends JDialog {
         label8 = new JLabel();
         label9 = new JLabel();
         label10 = new JLabel();
-        label11 = new JLabel();
-        tipoServidorCbx = new JComboBox();
-        label13 = new JLabel();
         dadosEnderecoPanel = new JPanel();
         label14 = new JLabel();
         cepTxt = new JTextField();
@@ -196,7 +186,10 @@ public class FormularioServidorView extends JDialog {
         fone2Txt = new JTextField();
         cpfTxt = new JTextField();
         rgTxt = new JTextField();
-        siapeTxt = new JTextField();
+        usernameTxt = new JTextField();
+        label11 = new JLabel();
+        label13 = new JLabel();
+        senhaTxt = new JPasswordField();
         buttonBar = new JPanel();
         novoBtn = new JButton();
         cancelarBtn = new JButton();
@@ -206,20 +199,18 @@ public class FormularioServidorView extends JDialog {
         idLbl = new JLabel();
 
         //======== this ========
-        setTitle("IFSC - Servidores");
+        setTitle("IFSC - Usuarios");
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.
-            swing.border.EmptyBorder(0,0,0,0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e",javax.swing.border
-            .TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069al\u006fg"
-            ,java.awt.Font.BOLD,12),java.awt.Color.red),dialogPane. getBorder
-            ()));dialogPane. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java
-            .beans.PropertyChangeEvent e){if("\u0062or\u0064er".equals(e.getPropertyName()))throw new RuntimeException
-            ();}});
+            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
@@ -271,12 +262,6 @@ public class FormularioServidorView extends JDialog {
                     //---- label10 ----
                     label10.setText("CPF");
 
-                    //---- label11 ----
-                    label11.setText("Tipo servidor");
-
-                    //---- label13 ----
-                    label13.setText("Siape");
-
                     //======== dadosEnderecoPanel ========
                     {
                         dadosEnderecoPanel.setBorder(new BevelBorder(BevelBorder.RAISED));
@@ -305,14 +290,14 @@ public class FormularioServidorView extends JDialog {
                                     .addGroup(dadosEnderecoPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(GroupLayout.Alignment.LEADING, dadosEnderecoPanelLayout.createSequentialGroup()
                                             .addComponent(label14)
-                                            .addGap(422, 446, Short.MAX_VALUE))
+                                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(GroupLayout.Alignment.LEADING, dadosEnderecoPanelLayout.createSequentialGroup()
                                             .addGroup(dadosEnderecoPanelLayout.createParallelGroup()
                                                 .addComponent(cepTxt, GroupLayout.Alignment.TRAILING)
                                                 .addGroup(dadosEnderecoPanelLayout.createSequentialGroup()
                                                     .addComponent(descricaoTxt, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
                                                     .addGap(47, 47, 47)
-                                                    .addComponent(numeroTxt, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)))
+                                                    .addComponent(numeroTxt)))
                                             .addContainerGap())
                                         .addGroup(GroupLayout.Alignment.LEADING, dadosEnderecoPanelLayout.createSequentialGroup()
                                             .addComponent(label12)
@@ -323,7 +308,7 @@ public class FormularioServidorView extends JDialog {
                                             .addGroup(dadosEnderecoPanelLayout.createParallelGroup()
                                                 .addComponent(label18)
                                                 .addComponent(cidadeCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(dadosEnderecoPanelLayout.createParallelGroup()
                                                 .addComponent(label15)
                                                 .addComponent(bairroTxt, GroupLayout.PREFERRED_SIZE, 253, GroupLayout.PREFERRED_SIZE))
@@ -336,7 +321,7 @@ public class FormularioServidorView extends JDialog {
                                     .addComponent(label14)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(cepTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                                     .addGroup(dadosEnderecoPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(dadosEnderecoPanelLayout.createSequentialGroup()
                                             .addComponent(label15)
@@ -354,70 +339,81 @@ public class FormularioServidorView extends JDialog {
                                     .addGroup(dadosEnderecoPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(descricaoTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(numeroTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                    .addContainerGap(27, Short.MAX_VALUE))
+                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         );
                     }
+
+                    //---- label11 ----
+                    label11.setText("Username");
+
+                    //---- label13 ----
+                    label13.setText("Senha");
 
                     GroupLayout dadosPanelLayout = new GroupLayout(dadosPanel);
                     dadosPanel.setLayout(dadosPanelLayout);
                     dadosPanelLayout.setHorizontalGroup(
                         dadosPanelLayout.createParallelGroup()
                             .addGroup(dadosPanelLayout.createSequentialGroup()
-                                .addComponent(label4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(GroupLayout.Alignment.TRAILING, dadosPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(dadosPanelLayout.createParallelGroup()
                                     .addGroup(dadosPanelLayout.createSequentialGroup()
                                         .addGroup(dadosPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                             .addComponent(label2, GroupLayout.Alignment.LEADING)
-                                            .addComponent(label3, GroupLayout.Alignment.LEADING)
-                                            .addGroup(GroupLayout.Alignment.LEADING, dadosPanelLayout.createSequentialGroup()
-                                                .addComponent(label1)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(diaTxt, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(label5)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(mesTxt, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(label6)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(anoTxt, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(175, 175, 175))
+                                            .addComponent(label3, GroupLayout.Alignment.LEADING))
+                                        .addGap(350, 350, 350))
                                     .addGroup(dadosPanelLayout.createSequentialGroup()
-                                        .addGroup(dadosPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                            .addComponent(dadosEnderecoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(nomeTxt, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                                            .addComponent(emailTxt, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                                            .addGroup(GroupLayout.Alignment.LEADING, dadosPanelLayout.createSequentialGroup()
+                                        .addGroup(dadosPanelLayout.createParallelGroup()
+                                            .addComponent(dadosEnderecoPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(nomeTxt, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                                            .addComponent(emailTxt, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                                            .addGroup(dadosPanelLayout.createSequentialGroup()
                                                 .addGroup(dadosPanelLayout.createParallelGroup()
                                                     .addComponent(label10)
-                                                    .addComponent(label11)
-                                                    .addComponent(tipoServidorCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(cpfTxt, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(dadosPanelLayout.createParallelGroup()
-                                                    .addComponent(siapeTxt, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                                    .addComponent(rgTxt, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                                    .addComponent(rgTxt)
                                                     .addGroup(dadosPanelLayout.createSequentialGroup()
-                                                        .addGroup(dadosPanelLayout.createParallelGroup()
-                                                            .addComponent(label9)
-                                                            .addComponent(label13))
-                                                        .addGap(0, 203, Short.MAX_VALUE)))))
+                                                        .addComponent(label9)
+                                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                            .addGroup(dadosPanelLayout.createSequentialGroup()
+                                                .addGroup(dadosPanelLayout.createParallelGroup()
+                                                    .addComponent(foneTxt, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(label7))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(dadosPanelLayout.createParallelGroup()
+                                                    .addGroup(dadosPanelLayout.createSequentialGroup()
+                                                        .addComponent(label8)
+                                                        .addGap(169, 169, 169))
+                                                    .addComponent(fone2Txt)))
+                                            .addGroup(dadosPanelLayout.createSequentialGroup()
+                                                .addGroup(dadosPanelLayout.createParallelGroup()
+                                                    .addComponent(label4)
+                                                    .addGroup(dadosPanelLayout.createSequentialGroup()
+                                                        .addComponent(label1)
+                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(diaTxt, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(label5)
+                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(mesTxt, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(label6)
+                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(anoTxt, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(272, 272, 272)))
                                         .addContainerGap())
                                     .addGroup(dadosPanelLayout.createSequentialGroup()
                                         .addGroup(dadosPanelLayout.createParallelGroup()
-                                            .addComponent(foneTxt, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(label7))
+                                            .addComponent(usernameTxt, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label11))
                                         .addGap(18, 18, 18)
                                         .addGroup(dadosPanelLayout.createParallelGroup()
                                             .addGroup(dadosPanelLayout.createSequentialGroup()
-                                                .addComponent(label8)
+                                                .addComponent(label13)
                                                 .addGap(0, 0, Short.MAX_VALUE))
-                                            .addGroup(dadosPanelLayout.createSequentialGroup()
-                                                .addComponent(fone2Txt, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                                .addContainerGap())))))
+                                            .addComponent(senhaTxt))
+                                        .addGap(6, 6, 6))))
                     );
                     dadosPanelLayout.setVerticalGroup(
                         dadosPanelLayout.createParallelGroup()
@@ -429,8 +425,17 @@ public class FormularioServidorView extends JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(label3)
                                 .addGap(12, 12, 12)
-                                .addComponent(emailTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGroup(dadosPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addGroup(dadosPanelLayout.createSequentialGroup()
+                                        .addComponent(emailTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(dadosPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(label11)
+                                            .addComponent(label13))
+                                        .addGap(9, 9, 9)
+                                        .addComponent(usernameTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(senhaTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31)
                                 .addComponent(label4)
                                 .addGap(18, 18, 18)
                                 .addGroup(dadosPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -456,14 +461,6 @@ public class FormularioServidorView extends JDialog {
                                 .addGroup(dadosPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                     .addComponent(cpfTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rgTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(dadosPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(label11)
-                                    .addComponent(label13))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(dadosPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tipoServidorCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(siapeTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(dadosEnderecoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())
@@ -530,9 +527,6 @@ public class FormularioServidorView extends JDialog {
     private JLabel label8;
     private JLabel label9;
     private JLabel label10;
-    private JLabel label11;
-    private JComboBox tipoServidorCbx;
-    private JLabel label13;
     private JPanel dadosEnderecoPanel;
     private JLabel label14;
     private JTextField cepTxt;
@@ -548,7 +542,10 @@ public class FormularioServidorView extends JDialog {
     private JTextField fone2Txt;
     private JTextField cpfTxt;
     private JTextField rgTxt;
-    private JTextField siapeTxt;
+    private JTextField usernameTxt;
+    private JLabel label11;
+    private JLabel label13;
+    private JPasswordField senhaTxt;
     private JPanel buttonBar;
     private JButton novoBtn;
     private JButton cancelarBtn;

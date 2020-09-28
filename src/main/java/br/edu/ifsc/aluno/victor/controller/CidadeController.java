@@ -32,4 +32,8 @@ public class CidadeController {
     public void deletar(Integer id) {
         cidadeService.deletar(id);
     }
+
+    public Cidade consultarPorDescricao(String descricao) {
+        return cidadeService.consultar(descricao);
+    };
 }

@@ -142,7 +142,7 @@ public class CidadeDAOJdbc implements CidadeDAO {
         PreparedStatement pstm;
         ResultSet rs;
 
-        String query = "SELECT id, descricao FROM cidade WHERE descricao = ?";
+        String query = "SELECT id, descricao FROM cidade WHERE descricao LIKE ?";
 
         try {
             Cidade cidade = null;
@@ -156,7 +156,7 @@ public class CidadeDAOJdbc implements CidadeDAO {
 
             ConnectionFactory.closeConnection(connection, pstm, rs);
 
-            return null;
+            return cidade;
         } catch (SQLException ex) {
             ConnectionFactory.closeConnection(connection);
             ex.printStackTrace();

@@ -13,4 +13,14 @@ public enum EnumModalidade {
     private EnumModalidade(String descricao) {
         this.descricao = descricao;
     }
+
+    public EnumModalidade valueOfByDescricao(String descricao) {
+        switch (descricao) {
+            case "Presencial":
+                return EnumModalidade.PRESENCIAL;
+            case "EAD":
+                return EnumModalidade.EAD;
+        }
+        return null;
+    }
 }

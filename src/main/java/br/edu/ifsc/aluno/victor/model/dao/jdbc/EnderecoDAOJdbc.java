@@ -203,16 +203,16 @@ public class EnderecoDAOJdbc implements EnderecoDAO {
             pstm.setString(4, endereco.getBairro());
             pstm.setInt(5, endereco.getCidade().getId());
             pstm.executeUpdate();
-            rs = pstm.getGeneratedKeys();
+            rs = pstm.executeQuery("SELECT LAST_INSERT_ID()");
             if (rs.next()) {
-                id = rs.getInt(1);
+                id = rs.getInt("LAST_INSERT_ID()");
             }
+            ConnectionFactory.closeConnection(connection, pstm, rs);
         } catch (SQLException ex) {
             ConnectionFactory.closeConnection(connection);
             ex.printStackTrace();
         }
 
-        ConnectionFactory.closeConnection(connection, pstm, rs);
         return id;
     }
 }

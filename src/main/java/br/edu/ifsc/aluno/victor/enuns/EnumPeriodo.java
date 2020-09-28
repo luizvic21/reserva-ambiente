@@ -14,4 +14,16 @@ public enum EnumPeriodo {
     private EnumPeriodo(String descricao) {
         this.descricao = descricao;
     }
+
+    public EnumPeriodo valueOfByDescricao(String descricao) {
+        switch (descricao) {
+            case "Matutino":
+                return EnumPeriodo.MATUTINO;
+            case "Noturno":
+                return EnumPeriodo.VESPERTINO;
+            case "Vespertino":
+                return EnumPeriodo.NOTURNO;
+        }
+        return null;
+    }
 }

@@ -38,16 +38,17 @@ public class ServidorServiceImpl implements ServidorService {
 
     @Override
     public void alterar(Integer id, Servidor servidor) {
-        Endereco endereco = enderecoService.consultar(servidor.getEndereco().getId());
-        enderecoService.alterar(servidor.getEndereco().getId(), servidor.getEndereco());
         Servidor servidorAtual = consultar(id);
+        Endereco endereco = enderecoService.consultar(servidorAtual.getEndereco().getId());
+        enderecoService.alterar(servidorAtual.getEndereco().getId(), servidor.getEndereco());
         servidorDAO.update(servidorAtual.editar(endereco, servidor));
     }
 
     @Override
     public void deletar(Integer id) {
-        consultar(id);
+        Servidor servidor = consultar(id);
         servidorDAO.delete(id);
+        enderecoService.deletar(servidor.getEndereco().getId());
     }
 
     @Override

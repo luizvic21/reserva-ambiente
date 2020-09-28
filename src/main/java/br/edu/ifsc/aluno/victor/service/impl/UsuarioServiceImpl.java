@@ -39,9 +39,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void alterar(Integer id, Usuario usuario) {
-        Endereco endereco = enderecoService.consultar(usuario.getEndereco().getId());
-        enderecoService.alterar(usuario.getEndereco().getId(), usuario.getEndereco());
         Usuario usuarioAtual = consultar(id);
+        Endereco endereco = enderecoService.consultar(usuarioAtual.getEndereco().getId());
+        enderecoService.alterar(usuarioAtual.getEndereco().getId(), usuario.getEndereco());
         usuarioDAO.update(usuarioAtual.editar(endereco, usuario));
     }
 

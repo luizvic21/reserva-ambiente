@@ -32,4 +32,8 @@ public class BlocoController {
     public void deletar(Integer id) {
         blocoService.deletar(id);
     }
+
+    public Bloco consultarPorDescricao(String descricao) {
+        return blocoService.consultar(descricao);
+    };
 }

@@ -99,7 +99,7 @@ public class ListaAmbienteController implements ActionListener {
     private void remover(JTable tabela) {
         int codigoLinha = tabela.getSelectedRow();
         String descricao = tabela.getValueAt(codigoLinha, 1).toString();
-        int isRemover = MensagensUtils.RemoverMensagem("Bloco", descricao);
+        int isRemover = MensagensUtils.RemoverMensagem("Ambiente", descricao);
         if (isRemover == 0) {
             Integer id = Integer.valueOf(tabela.getValueAt(codigoLinha, 0).toString());
             this.ambienteController.deletar(id);

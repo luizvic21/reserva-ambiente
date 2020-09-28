@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
-			"title": "IFSC - Servidores"
+			"title": "IFSC - Usuarios"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
@@ -22,8 +22,8 @@ new FormModel {
 						"value": "North"
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-						"$horizontalGroup": "par l {seq {comp label4:::p::p, space :0:0:x}, seq t {space :::p, par l {seq l {par t {comp label2::l:p::p, comp label3::l:p::p, seq l {comp label1:::p::p, space :::p, comp diaTxt:::p:22:p, space s:::p, comp label5:::p::p, space :::p, comp mesTxt:::p:22:p, space :p:18:p, comp label6:::p::p, space :::p, comp anoTxt:::p:40:p}}, space :p:175:p}, seq {par t {comp dadosEnderecoPanel:::::x, comp nomeTxt::t::0:x, comp emailTxt::l::0:x, seq l {par l {comp label10::l:p::p, comp label11::l:p::p, comp tipoServidorCbx::l:p::p, comp cpfTxt::l:p:225:p}, space :p:18:p, par l {comp siapeTxt::::240:x, comp rgTxt::l::240:x, seq {par l {comp label9::l:p::p, comp label13:::p::p}, space :0:203:x}}}}, space :::p}, seq l {par l {comp foneTxt::l:p:225:p, comp label7::l:p::p}, space s:::p, par l {seq {comp label8:::p::p, space :0:0:x}, seq {comp fone2Txt::::240:x, space :::p}}}}}}"
-						"$verticalGroup": "par l {seq l {space :::p, comp label2:::p::p, space :p:14:p, comp nomeTxt:::p::p, space s:::p, comp label3:::p::p, space :p:12:p, comp emailTxt:::p::p, space s:::p, comp label4:::p::p, space s:::p, par b {comp label1::b:p::p, comp diaTxt::b:p::p, comp label5::b:p::p, comp mesTxt::b:p::p, comp anoTxt::l:p::p, comp label6::b:p::p}, space s:::p, par b {comp label7::b:p::p, comp label8::b:p::p}, space :p:8:p, par b {comp foneTxt::b:p::p, comp fone2Txt::b:p::p}, space :::p, par b {comp label10::b:p::p, comp label9::b:p::p}, space :p:9:p, par b {comp cpfTxt::b:p::p, comp rgTxt::b:p::p}, space s:::p, par b {comp label11::b:p::p, comp label13::b:p::p}, space u:::p, par t {comp tipoServidorCbx:::p::p, comp siapeTxt:::p::p}, space s:::p, comp dadosEnderecoPanel:::::x, space :::p}}"
+						"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par t {comp label2::l:p::p, comp label3::l:p::p}, space :p:350:p}, seq {par l {comp dadosEnderecoPanel::t:::x, comp nomeTxt::t::0:x, comp emailTxt::l::0:x, seq l {par l {comp label10::l:p::p, comp cpfTxt::l:p:225:p}, space :p:18:p, par l {comp rgTxt::l:::x, seq l {comp label9:::p::p, space :0:0:x}}}, seq l {par l {comp foneTxt::l:p:225:p, comp label7::l:p::p}, space s:::p, par l {seq l {comp label8:::p::p, space :p:169:p}, comp fone2Txt::l:::x}}, seq {par l {comp label4::l:p::p, seq l {comp label1:::p::p, space :::p, comp diaTxt:::p:22:p, space s:::p, comp label5:::p::p, space :::p, comp mesTxt:::p:22:p, space :p:18:p, comp label6:::p::p, space :::p, comp anoTxt:::p:40:p}}, space :p:272:p}}, space :::p}, seq l {par l {comp usernameTxt::l:p:225:p, comp label11::l:p::p}, space s:::p, par l {seq {comp label13:::p::p, space :0:0:x}, comp senhaTxt:::::x}, space :p:6:p}}}}"
+						"$verticalGroup": "par l {seq l {space :::p, comp label2:::p::p, space :p:14:p, comp nomeTxt:::p::p, space s:::p, comp label3:::p::p, space :p:12:p, par t {seq {comp emailTxt:::p::p, space s:::p, par b {comp label11::b:p::p, comp label13::b:p::p}, space :9:9:p, comp usernameTxt:::p::p}, comp senhaTxt:::p::p}, space :p:31:p, comp label4:::p::p, space s:::p, par b {comp label1::b:p::p, comp diaTxt::b:p::p, comp label5::b:p::p, comp mesTxt::b:p::p, comp anoTxt::l:p::p, comp label6::b:p::p}, space s:::p, par b {comp label7::b:p::p, comp label8::b:p::p}, space :p:8:p, par b {comp foneTxt::b:p::p, comp fone2Txt::b:p::p}, space :::p, par b {comp label10::b:p::p, comp label9::b:p::p}, space :p:9:p, par b {comp cpfTxt::b:p::p, comp rgTxt::b:p::p}, space s:::p, comp dadosEnderecoPanel:::::x, space :::p}}"
 					} ) {
 						name: "dadosPanel"
 						"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
@@ -82,20 +82,9 @@ new FormModel {
 							name: "label10"
 							"text": "CPF"
 						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label11"
-							"text": "Tipo servidor"
-						} )
-						add( new FormComponent( "javax.swing.JComboBox" ) {
-							name: "tipoServidorCbx"
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label13"
-							"text": "Siape"
-						} )
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq {space :::p, par t {seq l {comp label14:::p::p, space :422:446:x}, seq l {par l {comp cepTxt::t:::x, seq {comp descricaoTxt:::p:232:p, space :p:47:p, comp numeroTxt::::188:x}}, space :::p}, seq l {comp label12:::p::p, space :::x, comp label16:::p::p, space :p:192:p}, seq t {par l {comp label18:::p::p, comp cidadeCbx::l:p::p}, space ::105:x, par l {comp label15:::p::p, comp bairroTxt:::p:253:p}, space :::p}}}}"
-							"$verticalGroup": "par l {seq l {space :::p, comp label14:::p::p, space u:::p, comp cepTxt:::p::p, space ::9:x, par t {seq {comp label15:::p::p, space u:::p, comp bairroTxt:::p::p}, seq {comp label18:::p::p, space u:::p, comp cidadeCbx:::p::p}}, space s:::p, par l {comp label12:::p::p, comp label16:::p::p}, space u:::p, par b {comp descricaoTxt::b:p::p, comp numeroTxt::b:p::p}, space ::27:x}}"
+							"$horizontalGroup": "par l {seq {space :::p, par t {seq l {comp label14:::p::p, space :422::x}, seq l {par l {comp cepTxt::t:::x, seq {comp descricaoTxt:::p:232:p, space :p:47:p, comp numeroTxt:::::x}}, space :::p}, seq l {comp label12:::p::p, space :::x, comp label16:::p::p, space :p:192:p}, seq t {par l {comp label18:::p::p, comp cidadeCbx::l:p::p}, space :::x, par l {comp label15:::p::p, comp bairroTxt:::p:253:p}, space :::p}}}}"
+							"$verticalGroup": "par l {seq l {space :::p, comp label14:::p::p, space u:::p, comp cepTxt:::p::p, space ::36:x, par t {seq {comp label15:::p::p, space u:::p, comp bairroTxt:::p::p}, seq {comp label18:::p::p, space u:::p, comp cidadeCbx:::p::p}}, space s:::p, par l {comp label12:::p::p, comp label16:::p::p}, space u:::p, par b {comp descricaoTxt::b:p::p, comp numeroTxt::b:p::p}, space :::x}}"
 						} ) {
 							name: "dadosEnderecoPanel"
 							"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
@@ -148,7 +137,18 @@ new FormModel {
 							name: "rgTxt"
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "siapeTxt"
+							name: "usernameTxt"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label11"
+							"text": "Username"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label13"
+							"text": "Senha"
+						} )
+						add( new FormComponent( "javax.swing.JPasswordField" ) {
+							name: "senhaTxt"
 						} )
 					}, new FormLayoutConstraints( class java.lang.String ) {
 						"value": "Center"

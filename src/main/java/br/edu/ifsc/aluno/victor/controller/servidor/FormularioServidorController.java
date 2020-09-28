@@ -5,6 +5,8 @@ import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
 import br.edu.ifsc.aluno.victor.controller.CidadeController;
 import br.edu.ifsc.aluno.victor.controller.ServidorController;
 import br.edu.ifsc.aluno.victor.controller.system.MenuController;
+import br.edu.ifsc.aluno.victor.model.Cidade;
+import br.edu.ifsc.aluno.victor.model.Endereco;
 import br.edu.ifsc.aluno.victor.model.Servidor;
 import br.edu.ifsc.aluno.victor.view.servidor.FormularioServidorView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ public class FormularioServidorController implements ActionListener {
         this.formularioServidorView.initButtons(this);
         this.formularioServidorView.ativarBotoes(true);
         this.formularioServidorView.ativaInputs(true);
-        this.formularioServidorView.setTituloLbl("Cadastrar bloco");
+        this.formularioServidorView.setTituloLbl("Cadastrar servidor");
     }
 
     public void init(FormularioServidorView formularioServidorView, Servidor servidor) {
@@ -48,7 +50,9 @@ public class FormularioServidorController implements ActionListener {
         this.formularioServidorView.ativarBotoes(false);
         this.formularioServidorView.setDados(servidor);
         this.id = servidor.getId();
-        this.formularioServidorView.setTituloLbl("Editar bloco");
+        this.formularioServidorView.setTituloLbl("Editar servidor");
+        this.formularioServidorView.setCidades(cidadeController.consultar());
+        this.formularioServidorView.setTipoServidorCbx();
     }
 
     @Override
@@ -67,11 +71,16 @@ public class FormularioServidorController implements ActionListener {
     }
 
     private void clickGravar() {
+        Servidor servidor = formularioServidorView.getDados();
+        Cidade cidade = cidadeController.consultarPorDescricao(servidor.getEndereco().getCidade().getDescricao());
+        Endereco endereco = new Endereco(cidade, servidor.getEndereco());
+        servidor = new Servidor(endereco, servidor);
         if (Objects.isNull(id)) {
-            servidorController.cadastrar(formularioServidorView.getDados());
+
+            servidorController.cadastrar(servidor);
             MensagensUtils.CadastroSucesso("Servidor");
         } else {
-            servidorController.alterar(id, formularioServidorView.getDados());
+            servidorController.alterar(id, servidor);
             MensagensUtils.EditarSucesso("Servidor");
         }
         this.formularioServidorView.ativarBotoes(true);

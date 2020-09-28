@@ -112,7 +112,7 @@ public class ListaServidorController implements ActionListener {
     private void remover(JTable tabela) {
         int codigoLinha = tabela.getSelectedRow();
         String descricao = tabela.getValueAt(codigoLinha, 1).toString();
-        int isRemover = MensagensUtils.RemoverMensagem("Bloco", descricao);
+        int isRemover = MensagensUtils.RemoverMensagem("Servidor", descricao);
         if (isRemover == 0) {
             Integer id = Integer.valueOf(tabela.getValueAt(codigoLinha, 0).toString());
             this.servidorController.deletar(id);
@@ -122,17 +122,17 @@ public class ListaServidorController implements ActionListener {
     }
 
     private void clickEditar() {
-//        JTable listagem = this.listaServidorView.getListagemTbt();
-//        if(listagem.getSelectedRow() > -1){
-//            int codigoLinha = listagem.getSelectedRow();
-//            Integer id = Integer.parseInt(listagem.getValueAt(codigoLinha, 0).toString());
-//
-//            Bloco bloco = servidorController.consultarPorId(id);
-//            FormularioBlocoView formularioBlocoView = new FormularioBlocoView(null);
-//            formularioBlocoController.init(formularioBlocoView, bloco);
-//            formularioBlocoController.abrir();
-//        }else{
-//            MensagensUtils.ErroEditar();
-//        }
+        JTable listagem = this.listaServidorView.getListagemTbt();
+        if(listagem.getSelectedRow() > -1){
+            int codigoLinha = listagem.getSelectedRow();
+            Integer id = Integer.parseInt(listagem.getValueAt(codigoLinha, 0).toString());
+
+            Servidor servidor = servidorController.consultarPorId(id);
+            FormularioServidorView formularioServidorView = new FormularioServidorView(null);
+            formularioServidorController.init(formularioServidorView, servidor);
+            formularioServidorController.abrir();
+        }else{
+            MensagensUtils.ErroEditar();
+        }
     }
 }

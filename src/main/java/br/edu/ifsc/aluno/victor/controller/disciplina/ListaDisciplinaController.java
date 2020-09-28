@@ -104,7 +104,7 @@ public class ListaDisciplinaController implements ActionListener {
     private void remover(JTable tabela) {
         int codigoLinha = tabela.getSelectedRow();
         String descricao = tabela.getValueAt(codigoLinha, 1).toString();
-        int isRemover = MensagensUtils.RemoverMensagem("Bloco", descricao);
+        int isRemover = MensagensUtils.RemoverMensagem("Disciplina", descricao);
         if (isRemover == 0) {
             Integer id = Integer.valueOf(tabela.getValueAt(codigoLinha, 0).toString());
             this.cursoDisciplinaController.deletar(id);
