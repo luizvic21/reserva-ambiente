@@ -49,4 +49,9 @@ public class ServidorServiceImpl implements ServidorService {
         consultar(id);
         servidorDAO.delete(id);
     }
+
+    @Override
+    public Servidor consultar(String nome) {
+        return servidorDAO.findByDescricao(nome);
+    }
 }

@@ -135,4 +135,33 @@ public class CidadeDAOJdbc implements CidadeDAO {
 
         ConnectionFactory.closeConnection(connection, pstm);
     }
+
+    @Override
+    public Cidade findByDescricao(String descricao) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement pstm;
+        ResultSet rs;
+
+        String query = "SELECT id, descricao FROM cidade WHERE descricao = ?";
+
+        try {
+            Cidade cidade = null;
+            pstm = connection.prepareStatement(query);
+            pstm.setString(1, descricao);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                cidade = new Cidade(rs.getInt("id"), rs.getString("descricao"));
+            }
+
+            ConnectionFactory.closeConnection(connection, pstm, rs);
+
+            return null;
+        } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection);
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
 }

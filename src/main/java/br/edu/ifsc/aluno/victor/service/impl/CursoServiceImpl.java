@@ -40,4 +40,9 @@ public class CursoServiceImpl implements CursoService {
         consultar(id);
         cursoDAO.delete(id);
     }
+
+    @Override
+    public Curso consultar(String descricao) {
+        return cursoDAO.findByDescricao(descricao);
+    }
 }

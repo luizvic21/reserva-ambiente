@@ -5,10 +5,9 @@ import br.edu.ifsc.aluno.victor.Utils.DateUtils;
 import br.edu.ifsc.aluno.victor.Utils.MensagensUtils;
 import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
 import br.edu.ifsc.aluno.victor.controller.ServidorController;
-import br.edu.ifsc.aluno.victor.controller.bloco.FormularioBlocoController;
 import br.edu.ifsc.aluno.victor.controller.system.MenuController;
 import br.edu.ifsc.aluno.victor.model.Servidor;
-import br.edu.ifsc.aluno.victor.view.bloco.FormularioBlocoView;
+import br.edu.ifsc.aluno.victor.view.servidor.FormularioServidorView;
 import br.edu.ifsc.aluno.victor.view.servidor.ListaServidorView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,7 @@ public class ListaServidorController implements ActionListener {
     private MenuController menuController;
 
     @Autowired
-    private FormularioBlocoController formularioBlocoController;
+    private FormularioServidorController formularioServidorController;
 
     private ListaServidorView listaServidorView;
 
@@ -60,9 +59,9 @@ public class ListaServidorController implements ActionListener {
     }
 
     private void abrirFormularioCadastro() {
-        FormularioBlocoView formularioBlocoView = new FormularioBlocoView(listaServidorView);
-        this.formularioBlocoController.init(formularioBlocoView);
-        this.formularioBlocoController.abrir();
+        FormularioServidorView formularioServidorView = new FormularioServidorView(listaServidorView);
+        this.formularioServidorController.init(formularioServidorView);
+        this.formularioServidorController.abrir();
     }
 
     private void definirTabela() {

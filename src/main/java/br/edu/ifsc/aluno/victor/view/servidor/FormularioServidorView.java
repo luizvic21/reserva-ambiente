@@ -6,6 +6,7 @@ package br.edu.ifsc.aluno.victor.view.servidor;
 
 import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
 import br.edu.ifsc.aluno.victor.enuns.EnumTipoServidor;
+import br.edu.ifsc.aluno.victor.model.Cidade;
 import br.edu.ifsc.aluno.victor.model.Endereco;
 import br.edu.ifsc.aluno.victor.model.Servidor;
 
@@ -15,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * @author unknown
@@ -74,7 +76,7 @@ public class FormularioServidorView extends JDialog {
         String descricao = this.descricaoTxt.getText();
         String bairro = this.bairroTxt.getText();
         Integer numero = Integer.parseInt(this.numeroTxt.getText());
-        EnumTipoServidor tipoServidor = EnumTipoServidor.valueOf(this.tipoServidorCbx.getItemAt(this.tipoServidorCbx.getSelectedIndex()));
+        EnumTipoServidor tipoServidor = EnumTipoServidor.valueOf((String) this.tipoServidorCbx.getItemAt(this.tipoServidorCbx.getSelectedIndex()));
         LocalDate dataNascimento = LocalDate.of(ano, mes, dia);
         Endereco endereco = new Endereco(null, cep, descricao, numero, bairro, null);
         return new Servidor(id, nome, dataNascimento, fone, fone2, email, cpf, rg, endereco, siape, tipoServidor, null);
@@ -96,8 +98,8 @@ public class FormularioServidorView extends JDialog {
             this.descricaoTxt.setText("");
             this.bairroTxt.setText("");
             this.numeroTxt.setText("");
-            this.tipoServidorCbx.setSelectedIndex(0);
-            this.cidadeCbx.setSelectedIndex(0);
+            cidadeCbx.removeAllItems();
+            tipoServidorCbx.removeAllItems();
         }
     }
 
@@ -117,8 +119,6 @@ public class FormularioServidorView extends JDialog {
         this.descricaoTxt.setText(servidor.getEndereco().getDescricao());
         this.bairroTxt.setText(servidor.getEndereco().getBairro());
         this.numeroTxt.setText(String.valueOf(servidor.getEndereco().getNumero()));
-        this.tipoServidorCbx.setSelectedIndex(0);
-        this.cidadeCbx.setSelectedIndex(0);
     }
 
     public void initButtons(ActionListener actionListener) {
@@ -140,6 +140,17 @@ public class FormularioServidorView extends JDialog {
     public void ativaInputs(boolean estadoInputs) {
         WindowUtils.AtivaInputs(estadoInputs, this.dadosPanel);
         WindowUtils.AtivaInputs(estadoInputs, this.dadosEnderecoPanel);
+    }
+    
+    public void setCidades(List<Cidade> cidades) {
+        tipoServidorCbx.removeAllItems();
+        cidades.forEach(cidade -> cidadeCbx.addItem(cidade.getDescricao()));
+    }
+
+    public void setTipoServidorCbx() {
+        for (EnumTipoServidor tipoServidor : EnumTipoServidor.values()) {
+            tipoServidorCbx.addItem(tipoServidor.getDescricao());
+        }
     }
 
     private void initComponents() {
@@ -166,7 +177,7 @@ public class FormularioServidorView extends JDialog {
         label9 = new JLabel();
         label10 = new JLabel();
         label11 = new JLabel();
-        tipoServidorCbx = new JComboBox<>();
+        tipoServidorCbx = new JComboBox();
         label13 = new JLabel();
         dadosEnderecoPanel = new JPanel();
         label14 = new JLabel();
@@ -178,7 +189,7 @@ public class FormularioServidorView extends JDialog {
         label17 = new JLabel();
         numeroTxt = new JTextField();
         label18 = new JLabel();
-        cidadeCbx = new JComboBox<>();
+        cidadeCbx = new JComboBox();
         foneTxt = new JTextField();
         fone2Txt = new JTextField();
         cpfTxt = new JTextField();
@@ -200,12 +211,11 @@ public class FormularioServidorView extends JDialog {
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing.
-            border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder. CENTER
-            ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069alog", java .awt . Font
-            . BOLD ,12 ) ,java . awt. Color .red ) ,dialogPane. getBorder () ) ); dialogPane. addPropertyChangeListener(
-            new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order"
-            .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
@@ -260,12 +270,6 @@ public class FormularioServidorView extends JDialog {
                     //---- label11 ----
                     label11.setText("Tipo servidor");
 
-                    //---- tipoServidorCbx ----
-                    tipoServidorCbx.setModel(new DefaultComboBoxModel<>(new String[] {
-                        "TAE",
-                        "Docente"
-                    }));
-
                     //---- label13 ----
                     label13.setText("Siape");
 
@@ -287,11 +291,6 @@ public class FormularioServidorView extends JDialog {
 
                         //---- label18 ----
                         label18.setText("Cidade");
-
-                        //---- cidadeCbx ----
-                        cidadeCbx.setModel(new DefaultComboBoxModel<>(new String[] {
-                            "Tubar\u00e3o"
-                        }));
 
                         GroupLayout dadosEnderecoPanelLayout = new GroupLayout(dadosEnderecoPanel);
                         dadosEnderecoPanel.setLayout(dadosEnderecoPanelLayout);
@@ -522,7 +521,7 @@ public class FormularioServidorView extends JDialog {
     private JLabel label9;
     private JLabel label10;
     private JLabel label11;
-    private JComboBox<String> tipoServidorCbx;
+    private JComboBox tipoServidorCbx;
     private JLabel label13;
     private JPanel dadosEnderecoPanel;
     private JLabel label14;
@@ -534,7 +533,7 @@ public class FormularioServidorView extends JDialog {
     private JLabel label17;
     private JTextField numeroTxt;
     private JLabel label18;
-    private JComboBox<String> cidadeCbx;
+    private JComboBox cidadeCbx;
     private JTextField foneTxt;
     private JTextField fone2Txt;
     private JTextField cpfTxt;

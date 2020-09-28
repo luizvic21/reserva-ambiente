@@ -11,4 +11,5 @@ public interface BlocoService {
     List<Bloco> consultar();
     void alterar(Integer id, Bloco bloco);
     void deletar(Integer id);
+    Bloco consultar(String descricao);
 }

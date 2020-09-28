@@ -11,4 +11,5 @@ public interface ServidorService {
     List<Servidor> consultar();
     void alterar(Integer id, Servidor servidor);
     void deletar(Integer id);
+    Servidor consultar(String Nome);
 }

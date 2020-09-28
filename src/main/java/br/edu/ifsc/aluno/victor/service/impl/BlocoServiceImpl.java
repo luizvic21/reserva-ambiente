@@ -40,4 +40,9 @@ public class BlocoServiceImpl implements BlocoService {
         consultar(id);
         blocoDAO.delete(id);
     }
+
+    @Override
+    public Bloco consultar(String descricao) {
+        return blocoDAO.findByDescricao(descricao);
+    }
 }

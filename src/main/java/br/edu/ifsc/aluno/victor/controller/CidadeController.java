@@ -3,9 +3,11 @@ package br.edu.ifsc.aluno.victor.controller;
 import br.edu.ifsc.aluno.victor.model.Cidade;
 import br.edu.ifsc.aluno.victor.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CidadeController {
 
     @Autowired

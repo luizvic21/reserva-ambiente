@@ -11,4 +11,5 @@ public interface CidadeService {
     List<Cidade> consultar();
     void alterar(Integer id, Cidade cidade);
     void deletar(Integer id);
+    Cidade consultar(String descricao);
 }

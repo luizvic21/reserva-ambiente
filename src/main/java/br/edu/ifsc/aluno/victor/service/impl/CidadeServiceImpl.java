@@ -40,4 +40,9 @@ public class CidadeServiceImpl implements CidadeService {
         consultar(id);
         cidadeDAO.delete(id);
     }
+
+    @Override
+    public Cidade consultar(String descricao) {
+        return cidadeDAO.findByDescricao(descricao);
+    }
 }

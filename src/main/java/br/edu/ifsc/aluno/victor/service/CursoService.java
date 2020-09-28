@@ -11,4 +11,5 @@ public interface CursoService {
     List<Curso> consultar();
     void alterar(Integer id, Curso curso);
     void deletar(Integer id);
+    Curso consultar(String descricao);
 }

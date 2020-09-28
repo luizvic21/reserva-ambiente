@@ -2,7 +2,6 @@ package br.edu.ifsc.aluno.victor.model.dao.jdbc;
 
 import br.edu.ifsc.aluno.victor.enuns.EnumModalidade;
 import br.edu.ifsc.aluno.victor.enuns.EnumPeriodo;
-import br.edu.ifsc.aluno.victor.model.Cidade;
 import br.edu.ifsc.aluno.victor.model.Curso;
 import br.edu.ifsc.aluno.victor.model.dao.ConnectionFactory;
 import br.edu.ifsc.aluno.victor.model.dao.CursoDAO;
@@ -155,5 +154,40 @@ public class CursoDAOJdbc implements CursoDAO {
         }
 
         ConnectionFactory.closeConnection(connection, pstm);
+    }
+
+    @Override
+    public Curso findByDescricao(String descricao) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement pstm;
+        ResultSet rs;
+
+        String query = "SELECT id, descricao, email, modalidade, periodo FROM curso WHERE descricao = ?";
+
+        try {
+            Curso curso = null;
+            pstm = connection.prepareStatement(query);
+            pstm.setString(1, descricao);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                curso = new Curso(
+                        rs.getInt("id"),
+                        rs.getString("descricao"),
+                        rs.getString("email"),
+                        EnumModalidade.valueOf(rs.getString("modalidade")),
+                        EnumPeriodo.valueOf(rs.getString("periodo"))
+                );
+            }
+
+            ConnectionFactory.closeConnection(connection, pstm, rs);
+
+            return curso;
+        } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection);
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -137,4 +137,33 @@ public class BlocoDAOJdbc implements BlocoDAO {
 
         ConnectionFactory.closeConnection(connection, pstm);
     }
+
+    @Override
+    public Bloco findByDescricao(String descricao) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement pstm;
+        ResultSet rs;
+
+        String query = "SELECT id, descricao, foto FROM bloco WHERE descricao = ?";
+
+        try {
+            Bloco bloco = null;
+            pstm = connection.prepareStatement(query);
+            pstm.setString(1, descricao);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                bloco = new Bloco(rs.getInt("id"), rs.getString("descricao"), rs.getString("foto"));
+            }
+
+            ConnectionFactory.closeConnection(connection, pstm, rs);
+
+            return bloco;
+        } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection);
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
 }

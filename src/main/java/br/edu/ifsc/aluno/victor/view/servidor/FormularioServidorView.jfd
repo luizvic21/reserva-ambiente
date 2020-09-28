@@ -88,11 +88,6 @@ new FormModel {
 						} )
 						add( new FormComponent( "javax.swing.JComboBox" ) {
 							name: "tipoServidorCbx"
-							"model": new javax.swing.DefaultComboBoxModel {
-								selectedItem: "TAE"
-								addElement( "TAE" )
-								addElement( "Docente" )
-							}
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label13"
@@ -138,10 +133,6 @@ new FormModel {
 							} )
 							add( new FormComponent( "javax.swing.JComboBox" ) {
 								name: "cidadeCbx"
-								"model": new javax.swing.DefaultComboBoxModel {
-									selectedItem: "Tubarão"
-									addElement( "Tubarão" )
-								}
 							} )
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
@@ -201,7 +192,7 @@ new FormModel {
 			"size": new java.awt.Dimension( 525, 860 )
 		} )
 		add( new FormComponent( "javax.swing.JLabel" ) {
-			name: "id"
+			name: "idLbl"
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 715, 245 )
 		} )
