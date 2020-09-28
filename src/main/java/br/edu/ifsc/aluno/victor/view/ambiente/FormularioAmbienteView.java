@@ -2,24 +2,24 @@
  * Created by JFormDesigner on Sun Sep 20 21:47:54 BRT 2020
  */
 
-package br.edu.ifsc.aluno.victor.view.curso;
+package br.edu.ifsc.aluno.victor.view.ambiente;
 
 import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
-import br.edu.ifsc.aluno.victor.enuns.EnumModalidade;
-import br.edu.ifsc.aluno.victor.enuns.EnumPeriodo;
-import br.edu.ifsc.aluno.victor.model.Curso;
+import br.edu.ifsc.aluno.victor.model.Ambiente;
+import br.edu.ifsc.aluno.victor.model.Bloco;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * @author unknown
  */
-public class FormularioCursoView extends JDialog {
-    public FormularioCursoView(Window owner) {
+public class FormularioAmbienteView extends JDialog {
+    public FormularioAmbienteView(Window owner) {
         super(owner);
         initComponents();
         idLbl.setText("");
@@ -49,37 +49,38 @@ public class FormularioCursoView extends JDialog {
         return sairBtn;
     }
 
-    public Curso getDados() {
-        Integer id = idLbl.getText().isEmpty() ? null : Integer.parseInt(idLbl.getText());
-        String descricao = descricaoTxt.getText();
-        String email = descricaoTxt.getText();
-        EnumModalidade modalidade = EnumModalidade.valueOf((String) modalidadeCbx.getSelectedItem());
-        EnumPeriodo periodo = EnumPeriodo.valueOf((String) periodoCbx.getSelectedItem());
-        return new Curso(id, descricao, email, modalidade, periodo);
-    }
-
-    public void resetar() {
-        if (idLbl.getText().isEmpty()) {
-            descricaoTxt.setText("");
-            emailTxt.setText("");
-            modalidadeCbx.removeAllItems();
-            periodoCbx.removeAllItems();
-        }
-    }
-
-    public void setDados(Curso curso) {
-        descricaoTxt.setText(curso.getDescricao());
-        emailTxt.setText(curso.getEmail());
-        modalidadeCbx.addItem(curso.getModalidade().toString());
-        periodoCbx.addItem(curso.getPeriodo().toString());
+    public JLabel getIdLbl() {
+        return idLbl;
     }
 
     public void setTituloLbl(String titulo) {
         this.tituloLbl.setText(titulo);
     }
 
-    public void ativaInputs(boolean estadoInputs) {
-        WindowUtils.AtivaInputs(estadoInputs, this.dadosPanel);
+    public Ambiente getDados() {
+        Integer id = idLbl.getText().isEmpty() ? null : Integer.parseInt(idLbl.getText());
+        String descricao = descricaoTxt.getText();
+        String sigla = siglaTxt.getText();
+        String chaveAcesso = chaveAcessoTxt.getText();
+        Bloco bloco = new Bloco(null, (String) blocoCbx.getSelectedItem(), null);
+        return new Ambiente(null, descricao, sigla, null, chaveAcesso, bloco);
+    }
+
+    public void resetar() {
+        if (idLbl.getText().isEmpty()) {
+            descricaoTxt.setText("");
+            siglaTxt.setText("");
+            chaveAcessoTxt.setText("");
+            blocoCbx.removeAllItems();
+        }
+    }
+
+    public void setDados(Ambiente ambiente) {
+        idLbl.setText(String.valueOf(ambiente.getId()));
+        descricaoTxt.setText(ambiente.getDescricao());
+        siglaTxt.setText(ambiente.getSigla());
+        chaveAcessoTxt.setText(ambiente.getChaveAcesso());
+        blocoCbx.addItem(ambiente.getBloco().getDescricao());
     }
 
     public void initButtons(ActionListener actionListener) {
@@ -98,34 +99,22 @@ public class FormularioCursoView extends JDialog {
         this.sairBtn.setEnabled(estadoBotoes);
     }
 
-    public void setModalidadeCbx() {
-        for (EnumModalidade modalidade : EnumModalidade.values()) {
-            modalidadeCbx.addItem(modalidade.toString());
-        }
-    }
-
-    public void setPeriodoCbx() {
-        for (EnumPeriodo periodo : EnumPeriodo.values()) {
-            periodoCbx.addItem(periodo.toString());
-        }
-    }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         dialogPane = new JPanel();
-        contentPanel = new JPanel();
+        centerPanel = new JPanel();
         panel1 = new JPanel();
         tituloLbl = new JLabel();
         dadosPanel = new JPanel();
+        label2 = new JLabel();
         descricaoTxt = new JTextField();
+        siglaTxt = new JTextField();
         label3 = new JLabel();
-        emailTxt = new JTextField();
+        chaveAcessoTxt = new JTextField();
         label4 = new JLabel();
         label1 = new JLabel();
-        modalidadeCbx = new JComboBox();
-        label2 = new JLabel();
-        periodoCbx = new JComboBox();
+        blocoCbx = new JComboBox();
         buttonBar = new JPanel();
         novoBtn = new JButton();
         cancelarBtn = new JButton();
@@ -135,26 +124,23 @@ public class FormularioCursoView extends JDialog {
         idLbl = new JLabel();
 
         //======== this ========
-        setTitle("IFSC - Cursos");
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("IFSC - Ambientes");
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing
-            . border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder
-            . CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .
-            awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,dialogPane. getBorder () ) )
-            ; dialogPane. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
-            ) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } )
-            ;
+            dialogPane.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(
+            0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder
+            .BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,12),java.awt.Color.
+            red),dialogPane. getBorder()));dialogPane. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.
+            beans.PropertyChangeEvent e){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}});
             dialogPane.setLayout(new BorderLayout());
 
-            //======== contentPanel ========
+            //======== centerPanel ========
             {
-                contentPanel.setLayout(new BorderLayout());
+                centerPanel.setLayout(new BorderLayout());
 
                 //======== panel1 ========
                 {
@@ -165,23 +151,23 @@ public class FormularioCursoView extends JDialog {
                     tituloLbl.setText("Titulo");
                     panel1.add(tituloLbl);
                 }
-                contentPanel.add(panel1, BorderLayout.NORTH);
+                centerPanel.add(panel1, BorderLayout.NORTH);
 
                 //======== dadosPanel ========
                 {
                     dadosPanel.setBorder(new BevelBorder(BevelBorder.RAISED));
 
+                    //---- label2 ----
+                    label2.setText("Descricao");
+
                     //---- label3 ----
-                    label3.setText("Descricao");
+                    label3.setText("Sigla");
 
                     //---- label4 ----
-                    label4.setText("E-mail");
+                    label4.setText("Chave de acesso");
 
                     //---- label1 ----
-                    label1.setText("Modalidade");
-
-                    //---- label2 ----
-                    label2.setText("Periodo");
+                    label1.setText("Bloco");
 
                     GroupLayout dadosPanelLayout = new GroupLayout(dadosPanel);
                     dadosPanel.setLayout(dadosPanelLayout);
@@ -190,19 +176,16 @@ public class FormularioCursoView extends JDialog {
                             .addGroup(dadosPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(dadosPanelLayout.createParallelGroup()
-                                    .addComponent(descricaoTxt)
-                                    .addGroup(GroupLayout.Alignment.TRAILING, dadosPanelLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(dadosPanelLayout.createParallelGroup()
-                                            .addComponent(label4)
-                                            .addComponent(emailTxt, GroupLayout.PREFERRED_SIZE, 483, GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(descricaoTxt, GroupLayout.Alignment.TRAILING)
+                                    .addComponent(siglaTxt)
                                     .addGroup(dadosPanelLayout.createSequentialGroup()
                                         .addGroup(dadosPanelLayout.createParallelGroup()
-                                            .addComponent(label3)
-                                            .addComponent(label1)
-                                            .addComponent(modalidadeCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                             .addComponent(label2)
-                                            .addComponent(periodoCbx, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(label3)
+                                            .addComponent(label4)
+                                            .addComponent(chaveAcessoTxt, GroupLayout.PREFERRED_SIZE, 483, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label1)
+                                            .addComponent(blocoCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
                     );
@@ -210,27 +193,27 @@ public class FormularioCursoView extends JDialog {
                         dadosPanelLayout.createParallelGroup()
                             .addGroup(dadosPanelLayout.createSequentialGroup()
                                 .addContainerGap()
+                                .addComponent(label2)
+                                .addGap(14, 14, 14)
+                                .addComponent(descricaoTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(label3)
                                 .addGap(12, 12, 12)
-                                .addComponent(descricaoTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(siglaTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(label4)
                                 .addGap(12, 12, 12)
-                                .addComponent(emailTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
+                                .addComponent(chaveAcessoTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(label1)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(modalidadeCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(label2)
-                                .addGap(18, 18, 18)
-                                .addComponent(periodoCbx, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(blocoCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(18, Short.MAX_VALUE))
                     );
                 }
-                contentPanel.add(dadosPanel, BorderLayout.CENTER);
+                centerPanel.add(dadosPanel, BorderLayout.CENTER);
             }
-            dialogPane.add(contentPanel, BorderLayout.CENTER);
+            dialogPane.add(centerPanel, BorderLayout.CENTER);
 
             //======== buttonBar ========
             {
@@ -267,21 +250,29 @@ public class FormularioCursoView extends JDialog {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+    public void setBlocoCbx(List<Bloco> blocos) {
+        blocos.forEach(bloco -> blocoCbx.addItem(bloco.getDescricao()));
+    }
+
+    public void ativaInputs(boolean estadoInputs) {
+        WindowUtils.AtivaInputs(estadoInputs, this.dadosPanel);
+    }
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
     private JPanel dialogPane;
-    private JPanel contentPanel;
+    private JPanel centerPanel;
     private JPanel panel1;
     private JLabel tituloLbl;
     private JPanel dadosPanel;
+    private JLabel label2;
     private JTextField descricaoTxt;
+    private JTextField siglaTxt;
     private JLabel label3;
-    private JTextField emailTxt;
+    private JTextField chaveAcessoTxt;
     private JLabel label4;
     private JLabel label1;
-    private JComboBox modalidadeCbx;
-    private JLabel label2;
-    private JComboBox periodoCbx;
+    private JComboBox blocoCbx;
     private JPanel buttonBar;
     private JButton novoBtn;
     private JButton cancelarBtn;

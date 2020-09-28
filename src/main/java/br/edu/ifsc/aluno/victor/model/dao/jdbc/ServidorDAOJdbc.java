@@ -327,4 +327,82 @@ public class ServidorDAOJdbc implements ServidorDAO {
 
         return null;
     }
+
+    @Override
+    public List<Servidor> findByTipo(EnumTipoServidor tipoServidor) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement pstm;
+        ResultSet rs;
+
+        String query = "SELECT\n" +
+                "  s.id as servidor_id,\n" +
+                "       s.nome,\n" +
+                "       s.data_nascimento,\n" +
+                "       s.fone,\n" +
+                "       s.fone2,\n" +
+                "       s.email,\n" +
+                "       s.cpf,\n" +
+                "       s.rg,\n" +
+                "       s.siape,\n" +
+                "       s.tipo_servidor,\n" +
+                "       s.foto,\n" +
+                "       s.endereco_id,\n" +
+                "       e.cep,\n" +
+                "       e.descricao as endereco_descricao,\n" +
+                "       e.numero,\n" +
+                "       e.bairro,\n" +
+                "       cidade_id,\n" +
+                "       c.descricao as cidade_descricao " +
+                "FROM\n" +
+                "     servidor s" +
+                "     JOIN endereco e on s.endereco_id = e.id\n" +
+                "     JOIN cidade c on e.cidade_id = c.id\n" +
+                "WHERE\n" +
+                "     s.tipo_servidor = ?";
+
+        try {
+            List<Servidor> servidores = new ArrayList<>();
+            pstm = connection.prepareStatement(query);
+            pstm.setString(1, tipoServidor.toString());
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                Cidade cidade = new Cidade(
+                        rs.getInt("cidade_id"),
+                        rs.getString("cidade_descricao")
+                );
+                Endereco endereco = new Endereco(
+                        rs.getInt("endereco_id"),
+                        rs.getString("cep"),
+                        rs.getString("endereco_descricao"),
+                        rs.getInt("numero"),
+                        rs.getString("bairro"),
+                        cidade);
+                Servidor servidor = new Servidor(
+                        rs.getInt("servidor_id"),
+                        rs.getString("nome"),
+                        rs.getDate("data_nascimento").toLocalDate(),
+                        rs.getString("fone"),
+                        rs.getString("fone2"),
+                        rs.getString("email"),
+                        rs.getString("cpf"),
+                        rs.getString("rg"),
+                        endereco,
+                        rs.getString("siape"),
+                        EnumTipoServidor.valueOf(rs.getString("tipo_servidor")),
+                        rs.getString("foto")
+                );
+                servidores.add(servidor);
+            }
+
+            ConnectionFactory.closeConnection(connection, pstm, rs);
+
+            return servidores;
+        } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection);
+            ex.printStackTrace();
+        }
+
+        return new ArrayList<>();
+    }
 }

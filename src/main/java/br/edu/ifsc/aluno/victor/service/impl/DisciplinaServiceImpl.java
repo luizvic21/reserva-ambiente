@@ -40,4 +40,9 @@ public class DisciplinaServiceImpl implements DisciplinaService {
         consultar(id);
         disciplinaDAO.delete(id);
     }
+
+    @Override
+    public Integer cadastrarRetornandoId(Disciplina disciplina) {
+        return disciplinaDAO.createReturnId(disciplina);
+    }
 }

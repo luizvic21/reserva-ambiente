@@ -11,4 +11,5 @@ public interface DisciplinaService {
     List<Disciplina> consultar();
     void alterar(Integer id, Disciplina disciplina);
     void deletar(Integer id);
+    Integer cadastrarRetornandoId(Disciplina disciplina);
 }

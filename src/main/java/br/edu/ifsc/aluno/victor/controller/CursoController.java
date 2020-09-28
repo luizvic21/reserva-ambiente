@@ -32,4 +32,8 @@ public class CursoController {
     public void deletar(Integer id) {
         cursoService.deletar(id);
     }
+
+    public Curso consultarPorDescricao(String descricao) {
+        return cursoService.consultar(descricao);
+    }
 }

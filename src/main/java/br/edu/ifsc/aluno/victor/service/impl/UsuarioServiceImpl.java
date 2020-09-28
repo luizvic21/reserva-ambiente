@@ -47,8 +47,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void deletar(Integer id) {
-        consultar(id);
+        Usuario usuario = consultar(id);
         usuarioDAO.delete(id);
+        enderecoService.deletar(usuario.getEndereco().getId());
     }
 
     @Override

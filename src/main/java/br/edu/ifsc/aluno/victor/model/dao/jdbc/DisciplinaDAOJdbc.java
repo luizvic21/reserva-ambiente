@@ -135,4 +135,30 @@ public class DisciplinaDAOJdbc implements DisciplinaDAO {
 
         ConnectionFactory.closeConnection(connection, pstm);
     }
+
+    @Override
+    public Integer createReturnId(Disciplina disciplina) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Integer id = null;
+
+        String query = "INSERT INTO disciplina (descricao) VALUES (?)";
+
+        try {
+            pstm = connection.prepareStatement(query);
+            pstm.setString(1, disciplina.getDescricao());
+            pstm.executeUpdate();
+            rs = pstm.executeQuery("SELECT LAST_INSERT_ID()");
+            if (rs.next()) {
+                id = rs.getInt("LAST_INSERT_ID()");
+            }
+            ConnectionFactory.closeConnection(connection, pstm, rs);
+        } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection);
+            ex.printStackTrace();
+        }
+
+        return id;
+    }
 }

@@ -1,0 +1,119 @@
+JFDML JFormDesigner: "7.0.2.6.321" Java: "11.0.7" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"title": "IFSC - Disciplinas"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+					name: "centerPanel"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+						name: "panel1"
+						"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "tituloLbl"
+							"text": "Titulo"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "North"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {seq {space :::p, par l {comp descricaoTxt::t:::x, comp siglaCursoTxt::l:::x, seq {par l {comp label2:::p::p, comp label3::l:p::p, comp label4:::p::p, comp faseCursoTxt::l:p:92:p, comp label5:::p::p, comp cargaHorariaTxt:::p:92:p, comp label1::l:p::p, comp cursoCbx::l:p::p, comp label6::l:p::p, comp docenteCbx::l:p::p}, space :0:374:x}}, space :::p}}"
+						"$verticalGroup": "par l {seq l {space :::p, comp label2:::p::p, space :p:14:p, comp descricaoTxt:::p::p, space s:::p, comp label3:::p::p, space :p:12:p, comp siglaCursoTxt:::p::p, space s:::p, comp label4:::p::p, space :p:12:p, comp faseCursoTxt:::p::p, space s:::p, comp label5:::p::p, space :12:12:p, comp cargaHorariaTxt:::p::p, space s:::p, comp label1:::p::p, space u:::p, comp cursoCbx:::p::p, space s:::p, comp label6:::p::p, space u:::p, comp docenteCbx:::p::p, space ::19:x}}"
+					} ) {
+						name: "dadosPanel"
+						"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label2"
+							"text": "Descricao"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "descricaoTxt"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "siglaCursoTxt"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label3"
+							"text": "Sigla do curso"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "faseCursoTxt"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label4"
+							"text": "Fase curso"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label5"
+							"text": "Carga horaria"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "cargaHorariaTxt"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label1"
+							"text": "Curso"
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cursoCbx"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label6"
+							"text": "Docente"
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "docenteCbx"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "Center"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+					name: "buttonBar"
+					"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "novoBtn"
+						"text": "Novo"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "cancelarBtn"
+						"text": "Cancelar"
+						"enabled": false
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "gravarBtn"
+						"text": "Gravar"
+						"enabled": false
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buscarBtn"
+						"text": "Buscar"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "sairBtn"
+						"text": "Sair"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 525, 630 )
+		} )
+		add( new FormComponent( "javax.swing.JLabel" ) {
+			name: "idLbl"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 715, 250 )
+		} )
+	}
+}

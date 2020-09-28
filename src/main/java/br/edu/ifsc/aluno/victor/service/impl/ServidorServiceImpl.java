@@ -1,5 +1,6 @@
 package br.edu.ifsc.aluno.victor.service.impl;
 
+import br.edu.ifsc.aluno.victor.enuns.EnumTipoServidor;
 import br.edu.ifsc.aluno.victor.model.Endereco;
 import br.edu.ifsc.aluno.victor.model.Servidor;
 import br.edu.ifsc.aluno.victor.model.dao.ServidorDAO;
@@ -54,5 +55,10 @@ public class ServidorServiceImpl implements ServidorService {
     @Override
     public Servidor consultar(String nome) {
         return servidorDAO.findByDescricao(nome);
+    }
+
+    @Override
+    public List<Servidor> consultar(EnumTipoServidor tipoServidor) {
+        return servidorDAO.findByTipo(tipoServidor);
     }
 }

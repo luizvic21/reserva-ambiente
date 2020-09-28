@@ -1,5 +1,6 @@
 package br.edu.ifsc.aluno.victor.controller;
 
+import br.edu.ifsc.aluno.victor.enuns.EnumTipoServidor;
 import br.edu.ifsc.aluno.victor.model.Servidor;
 import br.edu.ifsc.aluno.victor.service.ServidorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,13 @@ public class ServidorController {
 
     public void deletar(Integer id) {
         servidorService.deletar(id);
+    }
+
+    public List<Servidor> consultarPorTipo(EnumTipoServidor tipoServidor) {
+        return servidorService.consultar(tipoServidor);
+    }
+
+    public Servidor consultarPorNome(String nome) {
+        return servidorService.consultar(nome);
     }
 }

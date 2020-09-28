@@ -2,21 +2,26 @@
  * Created by JFormDesigner on Sun Sep 20 21:47:54 BRT 2020
  */
 
-package br.edu.ifsc.aluno.victor.view.ambiente;
+package br.edu.ifsc.aluno.victor.view.disciplina;
 
 import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
+import br.edu.ifsc.aluno.victor.model.Curso;
+import br.edu.ifsc.aluno.victor.model.CursoDisciplina;
+import br.edu.ifsc.aluno.victor.model.Disciplina;
+import br.edu.ifsc.aluno.victor.model.Servidor;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * @author unknown
  */
-public class FormularioTempleteView extends JDialog {
-    public FormularioTempleteView(Window owner) {
+public class FormularioDisciplinaView extends JDialog {
+    public FormularioDisciplinaView(Window owner) {
         super(owner);
         initComponents();
         idLbl.setText("");
@@ -54,19 +59,39 @@ public class FormularioTempleteView extends JDialog {
         this.tituloLbl.setText(titulo);
     }
 
-    public Object getDados() {
+    public CursoDisciplina getDados() {
         Integer id = idLbl.getText().isEmpty() ? null : Integer.parseInt(idLbl.getText());
-        return null;
+        String descricao = descricaoTxt.getText();
+        String siglaCurso = siglaCursoTxt.getText();
+        Integer faseCurso = Integer.parseInt(faseCursoTxt.getText());
+        Integer cargaHoraria = Integer.parseInt(cargaHorariaTxt.getText());
+        String descricaoCurso = (String) cursoCbx.getSelectedItem();
+        String nomeDocente = (String) docenteCbx.getSelectedItem();
+        Curso curso = new Curso(null, descricaoCurso, null, null, null);
+        Servidor docente = new Servidor(null, nomeDocente, null, null, null, null, null, null, null, null, null, null);
+        Disciplina disciplina = new Disciplina(null, descricao);
+        return new CursoDisciplina(null, siglaCurso, faseCurso, cargaHoraria, docente, curso, disciplina);
     }
 
     public void resetar() {
         if (idLbl.getText().isEmpty()) {
-
+            descricaoTxt.setText("");
+            siglaCursoTxt.setText("");
+            faseCursoTxt.setText("");
+            cargaHorariaTxt.setText("");
+            docenteCbx.removeAllItems();
+            cursoCbx.removeAllItems();
         }
     }
 
-    public void setDados(Object object) {
-        idLbl.setText(String.valueOf(object));
+    public void setDados(CursoDisciplina cursoDisciplina) {
+        idLbl.setText(String.valueOf(cursoDisciplina.getId()));
+        descricaoTxt.setText(cursoDisciplina.getDisciplina().getDescricao());
+        siglaCursoTxt.setText(cursoDisciplina.getSiglaCurso());
+        faseCursoTxt.setText(cursoDisciplina.getFaseCurso().toString());
+        cargaHorariaTxt.setText(cursoDisciplina.getCargaHoraria().toString());
+        docenteCbx.addItem(cursoDisciplina.getDocente().getNome());
+        cursoCbx.addItem(cursoDisciplina.getCurso().getDescricao());
     }
 
     public void initButtons(ActionListener actionListener) {
@@ -89,6 +114,14 @@ public class FormularioTempleteView extends JDialog {
         WindowUtils.AtivaInputs(estadoInputs, this.dadosPanel);
     }
 
+    public void setDocenteCbx(List<Servidor> docentes) {
+        docentes.forEach(docente -> docenteCbx.addItem(docente.getNome()));
+    }
+
+    public void setCursoCbx(List<Curso> cursos) {
+        cursos.forEach(curso -> cursoCbx.addItem(curso.getDescricao()));
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -98,9 +131,17 @@ public class FormularioTempleteView extends JDialog {
         tituloLbl = new JLabel();
         dadosPanel = new JPanel();
         label2 = new JLabel();
-        textField1 = new JTextField();
-        textField2 = new JTextField();
+        descricaoTxt = new JTextField();
+        siglaCursoTxt = new JTextField();
         label3 = new JLabel();
+        faseCursoTxt = new JTextField();
+        label4 = new JLabel();
+        label5 = new JLabel();
+        cargaHorariaTxt = new JTextField();
+        label1 = new JLabel();
+        cursoCbx = new JComboBox();
+        label6 = new JLabel();
+        docenteCbx = new JComboBox();
         buttonBar = new JPanel();
         novoBtn = new JButton();
         cancelarBtn = new JButton();
@@ -110,19 +151,20 @@ public class FormularioTempleteView extends JDialog {
         idLbl = new JLabel();
 
         //======== this ========
-        setTitle("IFSC - ");
+        setTitle("IFSC - Disciplinas");
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
-                    EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax.swing
-            .border.TitledBorder.BOTTOM,new Font("Dia\u006cog", Font.BOLD,12),
-            Color.red),dialogPane. getBorder()));dialogPane. addPropertyChangeListener(new java.beans.PropertyChangeListener()
-            {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))
-            throw new RuntimeException();}});
+            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
+            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing
+            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
+            Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
+            ) ,dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
+            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName (
+            ) )) throw new RuntimeException( ); }} );
             dialogPane.setLayout(new BorderLayout());
 
             //======== centerPanel ========
@@ -145,10 +187,22 @@ public class FormularioTempleteView extends JDialog {
                     dadosPanel.setBorder(new BevelBorder(BevelBorder.RAISED));
 
                     //---- label2 ----
-                    label2.setText("Nome");
+                    label2.setText("Descricao");
 
                     //---- label3 ----
-                    label3.setText("Descricao");
+                    label3.setText("Sigla do curso");
+
+                    //---- label4 ----
+                    label4.setText("Fase curso");
+
+                    //---- label5 ----
+                    label5.setText("Carga horaria");
+
+                    //---- label1 ----
+                    label1.setText("Curso");
+
+                    //---- label6 ----
+                    label6.setText("Docente");
 
                     GroupLayout dadosPanelLayout = new GroupLayout(dadosPanel);
                     dadosPanel.setLayout(dadosPanelLayout);
@@ -157,13 +211,21 @@ public class FormularioTempleteView extends JDialog {
                             .addGroup(dadosPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(dadosPanelLayout.createParallelGroup()
-                                    .addComponent(textField1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
-                                    .addComponent(textField2, GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                                    .addComponent(descricaoTxt, GroupLayout.Alignment.TRAILING)
+                                    .addComponent(siglaCursoTxt)
                                     .addGroup(dadosPanelLayout.createSequentialGroup()
                                         .addGroup(dadosPanelLayout.createParallelGroup()
                                             .addComponent(label2)
-                                            .addComponent(label3))
-                                        .addGap(0, 416, Short.MAX_VALUE)))
+                                            .addComponent(label3)
+                                            .addComponent(label4)
+                                            .addComponent(faseCursoTxt, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label5)
+                                            .addComponent(cargaHorariaTxt, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label1)
+                                            .addComponent(cursoCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label6)
+                                            .addComponent(docenteCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 374, Short.MAX_VALUE)))
                                 .addContainerGap())
                     );
                     dadosPanelLayout.setVerticalGroup(
@@ -172,12 +234,28 @@ public class FormularioTempleteView extends JDialog {
                                 .addContainerGap()
                                 .addComponent(label2)
                                 .addGap(14, 14, 14)
-                                .addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(descricaoTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(label3)
                                 .addGap(12, 12, 12)
-                                .addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(25, Short.MAX_VALUE))
+                                .addComponent(siglaCursoTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(label4)
+                                .addGap(12, 12, 12)
+                                .addComponent(faseCursoTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(label5)
+                                .addGap(12, 12, 12)
+                                .addComponent(cargaHorariaTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(label1)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cursoCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(label6)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(docenteCbx, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(19, Short.MAX_VALUE))
                     );
                 }
                 centerPanel.add(dadosPanel, BorderLayout.CENTER);
@@ -227,9 +305,17 @@ public class FormularioTempleteView extends JDialog {
     private JLabel tituloLbl;
     private JPanel dadosPanel;
     private JLabel label2;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField descricaoTxt;
+    private JTextField siglaCursoTxt;
     private JLabel label3;
+    private JTextField faseCursoTxt;
+    private JLabel label4;
+    private JLabel label5;
+    private JTextField cargaHorariaTxt;
+    private JLabel label1;
+    private JComboBox cursoCbx;
+    private JLabel label6;
+    private JComboBox docenteCbx;
     private JPanel buttonBar;
     private JButton novoBtn;
     private JButton cancelarBtn;

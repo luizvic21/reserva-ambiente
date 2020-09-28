@@ -32,7 +32,8 @@ public class CursoDisciplinaServiceImpl implements CursoDisciplinaService {
     @Override
     public void cadastrar(CursoDisciplina cursoDisciplina) {
         Curso curso = cursoService.consultar(cursoDisciplina.getCurso().getId());
-        Disciplina disciplina = disciplinaService.consultar(cursoDisciplina.getDisciplina().getId());
+        Integer idDisciplina = disciplinaService.cadastrarRetornandoId(cursoDisciplina.getDisciplina());
+        Disciplina disciplina = disciplinaService.consultar(idDisciplina);
         Servidor docente = servidorService.consultar(cursoDisciplina.getDocente().getId());
         cursoDisciplinaDAO.create(new CursoDisciplina(docente, curso, disciplina, cursoDisciplina));
     }
@@ -49,10 +50,11 @@ public class CursoDisciplinaServiceImpl implements CursoDisciplinaService {
 
     @Override
     public void alterar(Integer id, CursoDisciplina cursoDisciplina) {
-        Curso curso = cursoService.consultar(cursoDisciplina.getCurso().getId());
-        Disciplina disciplina = disciplinaService.consultar(cursoDisciplina.getDisciplina().getId());
-        Servidor docente = servidorService.consultar(cursoDisciplina.getDocente().getId());
         CursoDisciplina cursoDisciplinaAtual = consultar(id);
+        disciplinaService.alterar(cursoDisciplinaAtual.getDisciplina().getId(), cursoDisciplina.getDisciplina());
+        Curso curso = cursoService.consultar(cursoDisciplina.getCurso().getId());
+        Servidor docente = servidorService.consultar(cursoDisciplina.getDocente().getId());
+        Disciplina disciplina = disciplinaService.consultar(cursoDisciplinaAtual.getDisciplina().getId());
         cursoDisciplinaDAO.update(cursoDisciplinaAtual.editar(docente, curso, disciplina, cursoDisciplina));
     }
 

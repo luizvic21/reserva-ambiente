@@ -4,9 +4,9 @@ import br.edu.ifsc.aluno.victor.Utils.BotaoUtils;
 import br.edu.ifsc.aluno.victor.Utils.MensagensUtils;
 import br.edu.ifsc.aluno.victor.Utils.WindowUtils;
 import br.edu.ifsc.aluno.victor.controller.AmbienteController;
-import br.edu.ifsc.aluno.victor.controller.bloco.FormularioBlocoController;
 import br.edu.ifsc.aluno.victor.controller.system.MenuController;
 import br.edu.ifsc.aluno.victor.model.Ambiente;
+import br.edu.ifsc.aluno.victor.view.ambiente.FormularioAmbienteView;
 import br.edu.ifsc.aluno.victor.view.ambiente.ListaAmbienteView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class ListaAmbienteController implements ActionListener {
     private MenuController menuController;
 
     @Autowired
-    private FormularioBlocoController formularioBlocoController;
+    private FormularioAmbienteController formularioAmbienteController;
 
     private ListaAmbienteView listaAmbienteView;
 
@@ -58,9 +58,9 @@ public class ListaAmbienteController implements ActionListener {
     }
 
     private void abrirFormularioCadastro() {
-//        FormularioBlocoView formularioBlocoView = new FormularioBlocoView(listaAmbienteView);
-//        this.formularioBlocoController.init(formularioBlocoView);
-//        this.formularioBlocoController.abrir();
+        FormularioAmbienteView formularioBlocoView = new FormularioAmbienteView(listaAmbienteView);
+        this.formularioAmbienteController.init(formularioBlocoView);
+        this.formularioAmbienteController.abrir();
     }
 
     private void definirTabela() {
@@ -109,17 +109,17 @@ public class ListaAmbienteController implements ActionListener {
     }
 
     private void clickEditar() {
-//        JTable listagem = this.listaAmbienteView.getListagemTbt();
-//        if(listagem.getSelectedRow() > -1){
-//            int codigoLinha = listagem.getSelectedRow();
-//            Integer id = Integer.parseInt(listagem.getValueAt(codigoLinha, 0).toString());
-//
-//            Ambiente ambiente = ambienteController.consultarPorId(id);
-//            FormularioBlocoView formularioBlocoView = new FormularioBlocoView(null);
-//            formularioBlocoController.init(formularioBlocoView, ambiente);
-//            formularioBlocoController.abrir();
-//        }else{
-//            MensagensUtils.ErroEditar();
-//        }
+        JTable listagem = this.listaAmbienteView.getListagemTbt();
+        if(listagem.getSelectedRow() > -1){
+            int codigoLinha = listagem.getSelectedRow();
+            Integer id = Integer.parseInt(listagem.getValueAt(codigoLinha, 0).toString());
+
+            Ambiente ambiente = ambienteController.consultarPorId(id);
+            FormularioAmbienteView formularioBlocoView = new FormularioAmbienteView(listaAmbienteView);
+            formularioAmbienteController.init(formularioBlocoView, ambiente);
+            formularioAmbienteController.abrir();
+        }else{
+            MensagensUtils.ErroEditar();
+        }
     }
 }

@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
-			"title": "IFSC - "
+			"title": "IFSC - Ambientes"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
@@ -22,24 +22,38 @@ new FormModel {
 						"value": "North"
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-						"$horizontalGroup": "par l {seq {space :::p, par l {comp textField1::t::483:x, comp textField2::l::483:x, seq {par l {comp label2:::p::p, comp label3::l:p::p}, space :0:416:x}}, space :::p}}"
-						"$verticalGroup": "par l {seq l {space :::p, comp label2:::p::p, space :p:14:p, comp textField1:::p::p, space s:::p, comp label3:::p::p, space :p:12:p, comp textField2:::p::p, space ::25:x}}"
+						"$horizontalGroup": "par l {seq {space :::p, par l {comp descricaoTxt::t:::x, comp siglaTxt::l:::x, seq {par l {comp label2:::p::p, comp label3::l:p::p, comp label4:::p::p, comp chaveAcessoTxt:::p:483:p, comp label1::l:p::p, comp blocoCbx::l:p::p}, space :0:0:x}}, space :::p}}"
+						"$verticalGroup": "par l {seq l {space :::p, comp label2:::p::p, space :p:14:p, comp descricaoTxt:::p::p, space s:::p, comp label3:::p::p, space :p:12:p, comp siglaTxt:::p::p, space s:::p, comp label4:::p::p, space :12:12:p, comp chaveAcessoTxt:::p::p, space s:::p, comp label1:::p::p, space :::p, comp blocoCbx:::p::p, space ::18:x}}"
 					} ) {
 						name: "dadosPanel"
 						"border": new javax.swing.border.BevelBorder( 0, null, null, null, null )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label2"
-							"text": "Nome"
+							"text": "Descricao"
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "textField1"
+							name: "descricaoTxt"
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "textField2"
+							name: "siglaTxt"
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label3"
-							"text": "Descricao"
+							"text": "Sigla"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "chaveAcessoTxt"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label4"
+							"text": "Chave de acesso"
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label1"
+							"text": "Bloco"
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "blocoCbx"
 						} )
 					}, new FormLayoutConstraints( class java.lang.String ) {
 						"value": "Center"
@@ -80,10 +94,10 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 525, 300 )
+			"size": new java.awt.Dimension( 525, 455 )
 		} )
 		add( new FormComponent( "javax.swing.JLabel" ) {
-			name: "id"
+			name: "idLbl"
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 715, 245 )
 		} )
